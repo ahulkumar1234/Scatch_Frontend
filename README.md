@@ -74,9 +74,20 @@ npm start
 
 ## 📸 Screenshots
 
+**Admin Login:**
+![Preview](public/images/admin-login.jpeg)
 
+**User Login:**
+![Preview](public/images/user-login.jpeg)
 
+**Shop Page:**
+![Preview](public/images/shop-page.jpeg)
 
+**Cart Page:**
+![Preview](public/images/cart-page.jpeg)
+
+**Admin Page:**
+![Preview](public/images/admin-page.jpeg)
 
 
 
