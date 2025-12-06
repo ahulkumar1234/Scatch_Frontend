@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const handelLogout = async () => {
     try {
-      const res = await axios.post('http://localhost:3000/api/v1/users/logout',
+      const res = await axios.post('https://scatch-backend-41mw.onrender.com/api/v1/users/logout',
         {},
         {
           withCredentials: true
