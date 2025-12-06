@@ -29,7 +29,7 @@ const AuthPage = () => {
             if (isLogin) {
                 // LOGIN API
                 const res = await axios.post(
-                    "http://localhost:3000/api/v1/owners/signin",
+                    "https://scatch-backend-41mw.onrender.com/api/v1/owners/signin",
                     {
                         email: formData.email,
                         password: formData.password,

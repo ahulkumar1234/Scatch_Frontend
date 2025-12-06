@@ -43,7 +43,7 @@ const OwnerPanel = () => {
       form.append("stock", formData.stock);
       form.append("image", formData.image);
 
-      const res = await axios.post('http://localhost:3000/api/v1/products/create', form, {
+      const res = await axios.post('https://scatch-backend-41mw.onrender.com/api/v1/products/create', form, {
         headers: { "Content-Type": "multipart/form-data" }
       });
 

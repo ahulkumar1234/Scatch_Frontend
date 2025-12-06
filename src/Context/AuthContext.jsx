@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
   const checkLogin = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/v1/users/me",    // <-- FIXED PORT
+        "https://scatch-backend-41mw.onrender.com/api/v1/users/me",    // <-- FIXED PORT
         { withCredentials: true }
       );
       setIsLoggedIn(res.data.loggedIn);
