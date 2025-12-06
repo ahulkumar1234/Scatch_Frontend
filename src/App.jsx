@@ -7,10 +7,9 @@ import Shop from './pages/ShopPage/Shop';
 import OwnerPanel from './pages/OwnerPage/OwnerPanel';
 import Navbar from './components/Navbar/Navbar';
 import About from './pages/AboutPage/About';
-import Cart from './pages/CartPage/Cart';
 import ProtectedRoute from './components/AuthSystem/ProtectedRoute';
 import { AuthProvider } from './Context/AuthContext';  // <-- IMPORTANT
-import { CartProvider } from "./Context/CartContext";
+import Cart from './pages/CartPage/Cart';
 
 function App() {
 
@@ -20,7 +19,7 @@ function App() {
 
   return (
     <AuthProvider>
-      <CartProvider>
+
         <Toaster position="top-center" reverseOrder={false} />
         <Router>
           {/* {shouldShowNavbar && <Navbar />}    */}
@@ -33,10 +32,10 @@ function App() {
             {/* Protected Routes */}
             <Route path='/shop' element={<ProtectedRoute><Shop /></ProtectedRoute>} />
             <Route path='/about' element={<ProtectedRoute><About /></ProtectedRoute>} />
-            <Route path='/cart' element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+            <Route path='/cart' element={<ProtectedRoute><Cart/></ProtectedRoute>} />
           </Routes>
         </Router>
-      </CartProvider>
+
     </AuthProvider>
   )
 }

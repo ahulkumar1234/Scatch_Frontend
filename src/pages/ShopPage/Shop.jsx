@@ -5,12 +5,10 @@ import { FaCartShopping } from "react-icons/fa6";
 import { MdOutlineReviews } from "react-icons/md";
 import { SiMaterialdesignicons } from "react-icons/si";
 import { MdOutlineBrandingWatermark } from "react-icons/md";
-import { useCart } from "../../Context/CartContext";
 
 
 const Shop = () => {
 
-  const { addToCart } = useCart();
 
   const [products, setProducts] = useState([]);
 
@@ -21,7 +19,7 @@ const Shop = () => {
   ]
 
   const fetchProducts = async () => {
-    const res = await axios.get("http://localhost:3000/api/v1/products/all");
+    const res = await axios.get("https://scatch-backend-41mw.onrender.com/api/v1/products/all");
     setProducts(res.data.allproducts);
   };
 

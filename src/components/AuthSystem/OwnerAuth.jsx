@@ -48,7 +48,7 @@ const AuthPage = () => {
             } else {
                 // SIGNUP API
                 const res = await axios.post(
-                    "http://localhost:3000/api/v1/owners/register",
+                    "https://scatch-backend-41mw.onrender.com/api/v1/owners/register",
                     {
                         fullname: formData.fullname,
                         email: formData.email,

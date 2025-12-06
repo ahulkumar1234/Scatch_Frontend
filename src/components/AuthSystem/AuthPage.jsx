@@ -29,7 +29,7 @@ const AuthPage = () => {
             if (isLogin) {
                 // LOGIN API
                 const res = await axios.post(
-                    "http://localhost:3000/api/v1/users/login",
+                    "https://scatch-backend-41mw.onrender.com/api/v1/users/login",
                     {
                         email: formData.email,
                         password: formData.password,
@@ -50,7 +50,7 @@ const AuthPage = () => {
             } else {
                 // SIGNUP API
                 const res = await axios.post(
-                    "http://localhost:3000/api/v1/users/register",
+                    "https://scatch-backend-41mw.onrender.com/api/v1/users/register",
                     {
                         fullname: formData.fullname,
                         email: formData.email,
