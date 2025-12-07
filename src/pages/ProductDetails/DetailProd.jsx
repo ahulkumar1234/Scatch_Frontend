@@ -10,7 +10,7 @@ const DetailProd = () => {
 
 
     const fetchDetailsProducts = async () => {
-        const res = await axios.get(`https://scatch-backend-41mw.onrender.com/api/v1/products/${id}`)
+        const res = await axios.get(`https://scatch-backend-41mw.onrender.com/api/v1/products/details/${id}`)
         setProduct(res.data.data)
         console.log(res.data.data)
     }
