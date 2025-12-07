@@ -10,6 +10,7 @@ import About from './pages/AboutPage/About';
 import ProtectedRoute from './components/AuthSystem/ProtectedRoute';
 import { AuthProvider } from './Context/AuthContext';  // <-- IMPORTANT
 import Cart from './pages/CartPage/Cart';
+import DetailProd from './pages/ProductDetails/DetailProd';
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
             <Route path='/shop' element={<ProtectedRoute><Shop /></ProtectedRoute>} />
             <Route path='/about' element={<ProtectedRoute><About /></ProtectedRoute>} />
             <Route path='/cart' element={<ProtectedRoute><Cart/></ProtectedRoute>} />
+            <Route path='/details/:id' element={<ProtectedRoute><DetailProd/></ProtectedRoute>} />
           </Routes>
         </Router>
 

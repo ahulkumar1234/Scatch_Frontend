@@ -12,12 +12,6 @@ const Shop = () => {
 
   const [products, setProducts] = useState([]);
 
-  const [cardadded, setcartadded] = useState(false)
-
-  const addtoCart = () => [
-    setcartadded(!cardadded)
-  ]
-
   const fetchProducts = async () => {
     const res = await axios.get("https://scatch-backend-41mw.onrender.com/api/v1/products/all");
     setProducts(res.data.allproducts);
@@ -31,7 +25,7 @@ const Shop = () => {
   return (
     <>
 
-      <div className="flex gap-10 p-5 pt-24">
+      <div className="flex gap- p-5">
 
         {/* LEFT SIDEBAR */}
         <div className="left-menu w-48 flex flex-col gap-4 bg-white shadow-md p-4 ">
@@ -44,28 +38,26 @@ const Shop = () => {
         {/* PRODUCTS SECTION */}
         <div className="flex flex-wrap gap-5 justify-end flex-grow">
           {products.map((item) => (
-            <div
-              key={item._id}
-              className="bg-white shadow-lg p-4 cursor-pointer hover:scale-105 transition ease-in"
-            >
-              <img
-                src={item.image}
-                alt={item.title}
-                className="object-cover w-[200px] h-[200px]"
-              />
+            <NavLink to={`/details/${item._id}`} key={item._id}>
+              <div className="bg-white shadow-lg p-4 cursor-pointer hover:scale-105 transition ease-in">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="object-cover w-[200px] h-[200px]"
+                />
 
-              <h2 className="text-lg font-semibold mt-2">{item.title}</h2>
-              <p className="text-gray-600 w-[200px] text-sm">{item.description}</p>
+                <h2 className="text-lg font-semibold mt-2">{item.title}</h2>
+                <p className="text-gray-600 w-[200px] text-sm">{item.description}</p>
 
-              <div className="flex justify-between items-center mt-3">
-                <span className="font-bold text-green-600">₹{item.price}</span>
-                <button
-                  onClick={() => addToCart(item)}
-                  className={`${cardadded?'bg-gray-400':'bg-blue-600'} text-white px-3 py-1 rounded cursor-pointer`}>
-                  {cardadded?'Added':'Add to Cart'}
-                </button>
+                <div className="flex justify-between items-center mt-3">
+                  <span className="font-bold text-green-600">₹{item.price}</span>
+                  <button className="bg-blue-600 transition-all text-white px-3 py-1 rounded cursor-pointer">
+                    Add to Cart
+                  </button>
+                </div>
               </div>
-            </div>
+            </NavLink>
+
           ))}
         </div>
       </div>
