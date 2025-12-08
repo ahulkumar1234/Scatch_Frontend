@@ -4,12 +4,15 @@ import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 // import api from '../Api/Axios';
 import { Link } from "react-router-dom";
+import PulseLoader from "react-spinners/PulseLoader";
 
 
 
 const AuthPage = () => {
 
     const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
 
     const [isLogin, setIsLogin] = useState(true);
     const [formData, setFormData] = useState({
@@ -24,6 +27,8 @@ const AuthPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setLoading(true) // loader start
 
         try {
             if (isLogin) {
@@ -72,6 +77,7 @@ const AuthPage = () => {
             console.log(error.message);
             toast.error(error.response.data.message);
         }
+        setLoading(false); // loader stop
     };
 
     return (
@@ -139,10 +145,10 @@ const AuthPage = () => {
                     </div>
 
                     <button
-                        className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition"
+                        className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition cursor-pointer"
                         type="submit"
                     >
-                        {isLogin ? "Login" : "Create Account"}
+                        {loading ? <PulseLoader size={10} color="#fff" /> : (isLogin ? "Login" : "Create Account")}
                     </button>
                     <p className="flex justify-center items-center"><Link to='/' className="text-blue-600">Back to User Login</Link></p>
                 </form>

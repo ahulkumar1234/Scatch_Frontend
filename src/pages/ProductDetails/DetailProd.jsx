@@ -1,6 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom"
-import axios from "axios"
+import axios from "axios";
 import { useEffect, useState } from "react"
+import ScaleLoader from "react-spinners/ScaleLoader"
 
 const DetailProd = () => {
 
@@ -8,18 +9,32 @@ const DetailProd = () => {
     const { id } = useParams(); // URL se id mil jayegi 👉 useParams() URL se ID nikalta hai
     const [product, setProduct] = useState(null);
 
+    const addToCart = async () => {
+        try {
+            const res = await axios.post(
+                "https://scatch-backend-41mw.onrender.com/api/v1/cart/add",
+                { productId: product._id }, // product ID request body me bhejna
+                { withCredentials: true }   // cookie/token send automatically
+            );
+
+            alert("Added to Cart 🛒");
+            console.log(res.data);
+        } catch (error) {
+            console.log(error);
+            alert("Please login first!");
+        }
+    };
 
     const fetchDetailsProducts = async () => {
         const res = await axios.get(`https://scatch-backend-41mw.onrender.com/api/v1/products/details/${id}`)
         setProduct(res.data.data)
-        console.log(res.data.data)
     }
 
     useEffect(() => {
         fetchDetailsProducts()
     }, [id])
 
-    if (!product) return <h2 className="flex justify-center items-center h-screen">Loading...</h2>
+    if (!product) return <div className="flex justify-center items-center h-screen"><ScaleLoader color="blue" /></div>
 
     return (
         <>
@@ -68,12 +83,13 @@ const DetailProd = () => {
                             {/* Buttons */}
                             <div className="flex gap-4 mt-6">
                                 <button
-                                    className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 active:scale-95 transition-all"
+                                    className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+                                    onClick={addToCart}
                                 >
                                     Add to Cart
                                 </button>
                                 <button
-                                    className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 active:scale-95 transition-all"
+                                    className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 active:scale-95 transition-all cursor-pointer"
                                 >
                                     Buy Now
                                 </button>

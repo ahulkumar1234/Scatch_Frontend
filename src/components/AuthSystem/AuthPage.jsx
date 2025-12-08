@@ -1,15 +1,18 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 // import api from '../Api/Axios';
 import { Link } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
+import PulseLoader from "react-spinners/PulseLoader";
 
 
 const AuthPage = () => {
     const { setIsLoggedIn } = useAuth();
     const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(false);
 
     const [isLogin, setIsLogin] = useState(true);
     const [formData, setFormData] = useState({
@@ -24,7 +27,9 @@ const AuthPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+        
+        setLoading(true)// loader start
+        
         try {
             if (isLogin) {
                 // LOGIN API
@@ -44,7 +49,7 @@ const AuthPage = () => {
                     email: "",
                     password: ""
                 });
-                
+
                 setIsLoggedIn(true);
                 navigate('/shop') // redirect after login
             } else {
@@ -74,6 +79,8 @@ const AuthPage = () => {
             console.log(error.message);
             toast.error(error.response.data.message);
         }
+
+        setLoading(false); // ⬅️ loader stop (finally)
     };
 
     return (
@@ -141,10 +148,10 @@ const AuthPage = () => {
                     </div>
 
                     <button
-                        className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition"
+                        className="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition cursor-pointer"
                         type="submit"
                     >
-                        {isLogin ? "Login" : "Create Account"}
+                        {loading ? <PulseLoader size={10} color="#fff" /> : (isLogin ? "Login" : "Create Account")}
                     </button>
 
                     <p className="flex justify-center items-center gap-1">Admin login<Link to='/owner' className="text-blue-600 ">click</Link></p>
