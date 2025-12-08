@@ -1,54 +1,66 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import ScaleLoader from "react-spinners/ScaleLoader"
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([]);
+  const [cartItems, setCartItems] = useState(null);  // null initially
+  const [loading, setLoading] = useState(true);
 
-  // Fetch cart items from backend
-  const fetchCart = async () => {
+  const fetchCartItems = async () => {
     try {
       const res = await axios.get(
         "https://scatch-backend-41mw.onrender.com/api/v1/cart/cartItems",
-        { withCredentials: true } // token cookie send automatically
+        { withCredentials: true }
       );
-      setCartItems(res.data.items);
+      setCartItems(res.data.cartData?.items || []);  // fallback array
+      console.log(res)
     } catch (error) {
       console.log(error);
+      setCartItems([]); // to avoid crash
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    fetchCart();
+    fetchCartItems();
   }, []);
 
-  // Calculate total price
+  if (loading) {
+    return (
+      <h2 className="flex justify-center items-center h-screen text-xl">
+        <ScaleLoader color="blue" />
+      </h2>
+    );
+  }
+
+  if (!cartItems || cartItems.length === 0) {
+    return (
+      <h2 className="flex justify-center items-center h-screen text-xl">
+        Cart is Empty 🛒
+      </h2>
+    );
+  }
+
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.productId.price * item.quantity,
     0
   );
 
-  if (cartItems.length === 0)
-    return (
-      <h2 className="flex justify-center items-center h-screen text-xl">
-        Your cart is empty 🛒
-      </h2>
-    );
-
   return (
     <div className="bg-gray-100 min-h-screen py-10">
       <div className="max-w-6xl mx-auto bg-white shadow-md p-6 rounded-md">
 
-        <h1 className="text-2xl font-bold mb-6">Your Cart ({cartItems.length})</h1>
+        <h1 className="text-2xl font-bold mb-6">
+          Your Cart ({cartItems.length})
+        </h1>
 
         {cartItems.map((item) => (
-          <div
-            key={item._id}
-            className="flex items-center gap-6 border-b py-4"
-          >
+          <div key={item._id} className="flex items-center gap-6 border-b py-4">
             <img
               src={item.productId.image}
-              alt={item.productId.title}
               className="w-28 h-28 object-cover rounded"
+              alt=""
             />
 
             <div className="flex-1">
@@ -56,7 +68,7 @@ const Cart = () => {
                 {item.productId.title}
               </h2>
               <p className="text-gray-600">{item.productId.description}</p>
-              <p className="font-bold mt-1 text-green-700">
+              <p className="font-bold text-green-700 mt-1">
                 ₹ {item.productId.price}
               </p>
             </div>
@@ -67,15 +79,10 @@ const Cart = () => {
           </div>
         ))}
 
-        {/* Total */}
         <div className="mt-6 flex justify-between items-center text-xl font-bold">
-          <span>Total:</span>
+          <span>Total Amount:</span>
           <span>₹ {totalPrice}</span>
         </div>
-
-        <button className="w-full mt-6 bg-blue-600 text-white py-2 rounded hover:bg-blue-700 active:scale-95 transition-all">
-          Proceed to Checkout
-        </button>
       </div>
     </div>
   );
