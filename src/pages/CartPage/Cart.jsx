@@ -6,8 +6,8 @@ import toast from "react-hot-toast";
 const Cart = () => {
   const [cartItems, setCartItems] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [qty, setQty] = useState(1);
-  
+
+
   const fetchCartItems = async () => {
     try {
       const res = await axios.get(
@@ -15,6 +15,7 @@ const Cart = () => {
         { withCredentials: true }
       );
       setCartItems(res.data.Cartitems || []);
+      toast.success('Added to Cart');
     } catch (error) {
       toast.error(error)
       console.log(error)
