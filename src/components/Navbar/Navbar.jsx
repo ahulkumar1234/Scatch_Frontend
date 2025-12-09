@@ -36,7 +36,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`${isLoggedIn ? 'block' : 'hidden'} navbar flex justify-between items-center bg-gray-100 h-[10vh] p-5 shadow-lg  w-full z-10`}>
+      <nav className={`${isLoggedIn ? 'block' : 'hidden'} navbar flex justify-between items-center bg-gray-100 p-5 shadow-lg  w-full z-10 sticky`}>
         <h1 className="navbar-logo text-2xl text-blue-600 font-bold cursor-pointer">Scatch</h1>
         <div className="links">
           <NavLink

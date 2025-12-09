@@ -15,7 +15,6 @@ const Cart = () => {
         { withCredentials: true }
       );
       setCartItems(res.data.Cartitems || []);
-      toast.success('Added to Cart');
     } catch (error) {
       toast.error(error)
       console.log(error)
@@ -52,7 +51,7 @@ const Cart = () => {
   );
 
   return (
-    <div className="bg-gray-100 min-h-screen py-10">
+    <div className="bg-gray-100 min-h-screen my-10">
       <div className="max-w-6xl mx-auto bg-white shadow-md p-6 rounded-md">
 
         <h1 className="text-2xl font-bold mb-6">
