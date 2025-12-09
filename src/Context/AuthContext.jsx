@@ -9,13 +9,6 @@ export const AuthProvider = ({ children }) => {
   const checkLogin = async () => {
     try {
 
-      // Token check (Important to stop 401 error on logout)
-      const token = document.cookie.includes("token=");
-      if (!token) {
-        setIsLoggedIn(false);
-        return;
-      }
-
       const res = await axios.get(
         "https://scatch-backend-41mw.onrender.com/api/v1/users/me",    // <-- FIXED PORT
         { withCredentials: true }
