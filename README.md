@@ -87,7 +87,7 @@ npm start
 ![Preview](public/images/cart-page.jpeg)
 
 **Admin Page:**
-![Preview](public/images/admin-page.jpeg)
+![Preview](public/images/Owner%20Page.png)
 
 **Admin Store:**
 ![Preview](public/images/OWNERPANEL%20STORE.jpeg)
