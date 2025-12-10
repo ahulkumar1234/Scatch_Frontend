@@ -11,6 +11,7 @@ import ProtectedRoute from './components/AuthSystem/ProtectedRoute';
 import { AuthProvider } from './Context/AuthContext';  // <-- IMPORTANT
 import Cart from './pages/CartPage/Cart';
 import DetailProd from './pages/ProductDetails/DetailProd';
+import StorePage from './pages/OwnerPage/StorePage';
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/" element={<AuthPage />} />
             <Route path='/owner' element={<OwnerAuth />} />
             <Route path='/ownerpanel' element={<OwnerPanel />} />
+            <Route path='/ownerstore' element={<StorePage/>}/>
 
             {/* Protected Routes */}
             <Route path='/shop' element={<ProtectedRoute><Shop /></ProtectedRoute>} />

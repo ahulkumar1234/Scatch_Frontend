@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
+import { Link } from 'react-router-dom';
 import PulseLoader from "react-spinners/PulseLoader";
 
 
@@ -72,13 +73,18 @@ const OwnerPanel = () => {
       {/* Sidebar */}
       <div className="sidemenu bg-white w-1/4 h-screen p-5 border-x border-gray-300">
         <h1 className="text-xl text-blue-600 font-bold">Scatch <span className='text-black font-semibold'>Owner Panel</span></h1>
+
+        {/* Links */}
+        <div className="links mt-9">
+          <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center' to='/ownerstore'>Store</Link>
+        </div>
       </div>
 
       {/* Product Form Section */}
       <div className="bg-gray-100 w-3/4 min-h-screen flex flex-col md:flex-row justify-center items-start">
         <form onSubmit={handleSubmit} className="bg-white w-full max-w-4xl p-6 space-y-5 m-0 md:my-5">
 
-          <h2 className="text-2xl font-semibold text-gray-800 text-center">
+          <h2 className="text-2xl font-bold text-gray-800 text-center">
             Create New Product
           </h2>
 

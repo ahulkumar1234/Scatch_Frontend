@@ -58,7 +58,7 @@ const AuthPage = () => {
     <div className="min-h-screen flex justify-center items-center bg-[#F1F6FF] px-4">
       <div className="bg-white border border-gray-200 shadow-lg rounded-xl p-8 w-full max-w-md">
         {/* Logo */}
-        <h1 className="text-3xl font-bold text-blue-700 text-center mb-4">Scatch Admin</h1>
+        <h1 className="text-3xl font-extrabold text-blue-700 text-center mb-4">Scatch Admin</h1>
         <p className="text-center text-gray-500 mb-6">
           Access your admin dashboard
         </p>

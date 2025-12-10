@@ -30,9 +30,9 @@ const Cart = () => {
 
   if (loading) {
     return (
-      <h2 className="flex justify-center items-center h-screen text-xl">
+      <div className="flex justify-center items-center h-screen text-xl">
         <ScaleLoader color="blue" />
-      </h2>
+      </div>
     );
   }
 
