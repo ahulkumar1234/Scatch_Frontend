@@ -5,22 +5,34 @@ import { FaCartShopping } from "react-icons/fa6";
 import { MdOutlineReviews } from "react-icons/md";
 import { SiMaterialdesignicons } from "react-icons/si";
 import { MdOutlineBrandingWatermark } from "react-icons/md";
+import ScaleLoader from "react-spinners/ScaleLoader";
 
 
 const Shop = () => {
 
 
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const fetchProducts = async () => {
+    setLoading(true)
     const res = await axios.get("https://scatch-backend-41mw.onrender.com/api/v1/products/all");
     setProducts(res.data.allproducts);
+    setLoading(false)
   };
 
   useEffect(() => {
     fetchProducts();
   }, []);
 
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen w-full text-xl">
+        <ScaleLoader color="blue" />
+      </div>
+    );
+  }
 
   return (
     <>

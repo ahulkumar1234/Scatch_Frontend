@@ -4,6 +4,8 @@ import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import ClockLoader from "react-spinners/ClockLoader"
 import HashLoader from "react-spinners/HashLoader"
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 
 const StorePage = () => {
 
@@ -138,7 +140,7 @@ const StorePage = () => {
                                         }}
                                         className='bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 cursor-pointer'
                                     >
-                                        Edit
+                                        <FaEdit />
                                     </button>
                                 </td>
 
@@ -147,7 +149,7 @@ const StorePage = () => {
                                         onClick={() => handleDelete(item._id)}
                                         className='bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 cursor-pointer'
                                     >
-                                        {loading === item._id ? <ClockLoader size={20} color="#fff" /> : "Delete"}
+                                        {loading === item._id ? <ClockLoader size={20} color="#fff" /> : <MdDelete />}
                                     </button>
                                 </td>
                             </tr>

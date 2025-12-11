@@ -55,11 +55,11 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-[#F1F6FF] px-4">
-      <div className="bg-white border border-gray-200 shadow-lg rounded-xl p-8 w-full max-w-md">
+    <div className="min-h-screen flex justify-center items-center bg-[url('public/images/bg-image.jpg')] bg-cover bg-center px-4">
+      <div className="bg-transparent backdrop-blur-sm border border-gray-200 shadow-lg rounded-xl p-8 w-full max-w-md">
         {/* Logo */}
-        <h1 className="text-3xl font-extrabold text-blue-700 text-center mb-4">Scatch Admin</h1>
-        <p className="text-center text-gray-500 mb-6">
+        <h1 className="text-3xl font-extrabold text-blue-600 text-center mb-4">Scatch Admin</h1>
+        <p className="text-center text-gray-200 mb-6">
           Access your admin dashboard
         </p>
 
@@ -69,8 +69,8 @@ const AuthPage = () => {
             onClick={() => setIsLogin(true)}
             className={`pb-1 text-lg font-medium transition ${
               isLogin
-                ? "text-blue-700 border-b-2 border-blue-700"
-                : "text-gray-500 hover:text-blue-600"
+                ? "text-blue-700 border-b-2 border-blue-600"
+                : "text-gray-200 hover:text-blue-600"
             }`}
           >
             Login
@@ -80,7 +80,7 @@ const AuthPage = () => {
             className={`pb-1 text-lg font-medium transition ${
               !isLogin
                 ? "text-blue-700 border-b-2 border-blue-700"
-                : "text-gray-500 hover:text-blue-600"
+                : "text-gray-200 hover:text-blue-600"
             }`}
           >
             Signup
@@ -91,7 +91,7 @@ const AuthPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {!isLogin && (
             <div>
-              <label className="block text-sm mb-1 font-medium text-gray-700">
+              <label className="block text-sm mb-1 font-medium text-gray-300">
                 Full Name
               </label>
               <input
@@ -99,7 +99,7 @@ const AuthPage = () => {
                 name="fullname"
                 value={formData.fullname}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none"
+                className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none text-gray-200"
                 placeholder="Enter full name"
                 required={!isLogin}
               />
@@ -107,7 +107,7 @@ const AuthPage = () => {
           )}
 
           <div>
-            <label className="block text-sm mb-1 font-medium text-gray-700">
+            <label className="block text-sm mb-1 font-medium text-gray-300">
               Email
             </label>
             <input
@@ -115,14 +115,14 @@ const AuthPage = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none"
+              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none text-gray-200"
               placeholder="Enter email"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm mb-1 font-medium text-gray-700">
+            <label className="block text-sm mb-1 font-medium text-gray-300">
               Password
             </label>
             <input
@@ -130,7 +130,7 @@ const AuthPage = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none"
+              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none text-gray-200"
               placeholder="Enter password"
               required
             />
@@ -151,7 +151,7 @@ const AuthPage = () => {
           </button>
 
           <p className="flex justify-center mt-2 text-sm">
-            <Link to="/" className="text-blue-700 hover:underline font-medium">
+            <Link to="/" className="text-blue-600 hover:underline font-medium">
               Back to User Login
             </Link>
           </p>

@@ -62,13 +62,13 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-[#EEF4FF] px-4">
-      <div className="bg-white border border-gray-200 shadow-lg rounded-2xl p-8 w-full max-w-md">
+    <div className="min-h-screen flex justify-center items-center bg-[url('public/images/bg-image.jpg')] bg-cover bg-center px-4">
+      <div className="bg-transparent backdrop-blur-sm  border border-gray-200 shadow-lg rounded-2xl p-8 w-full max-w-md">
         {/* Logo */}
-        <h1 className="text-4xl font-extrabold text-blue-700 text-center mb-3">
+        <h1 className="text-4xl font-extrabold text-blue-600 text-center mb-3">
           Scatch
         </h1>
-        <p className="text-center text-gray-600 mb-8 text-[17px]">
+        <p className="text-center text-gray-200 mb-8 text-[17px]">
           {isLogin ? "Welcome back! Login to continue" : "Create an account to start shopping"}
         </p>
 
@@ -79,7 +79,7 @@ const AuthPage = () => {
             className={`pb-1 text-lg font-semibold transition ${
               isLogin
                 ? "text-blue-700 border-b-2 border-blue-700"
-                : "text-gray-500 hover:text-blue-600"
+                : "text-gray-300 hover:text-blue-600"
             }`}
           >
             Login
@@ -90,7 +90,7 @@ const AuthPage = () => {
             className={`pb-1 text-lg font-semibold transition ${
               !isLogin
                 ? "text-blue-700 border-b-2 border-blue-700"
-                : "text-gray-500 hover:text-blue-600"
+                : "text-gray-300 hover:text-blue-600"
             }`}
           >
             Signup
@@ -101,7 +101,7 @@ const AuthPage = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {!isLogin && (
             <div>
-              <label className="block text-sm mb-1 font-medium text-gray-700">
+              <label className="block text-sm mb-1 font-medium text-gray-200">
                 Full Name
               </label>
               <input
@@ -109,7 +109,7 @@ const AuthPage = () => {
                 name="fullname"
                 value={formData.fullname}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none"
+                className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none text-gray-200"
                 placeholder="Enter your full name"
                 required={!isLogin}
               />
@@ -117,7 +117,7 @@ const AuthPage = () => {
           )}
 
           <div>
-            <label className="block text-sm mb-1 font-medium text-gray-700">
+            <label className="block text-sm mb-1 font-medium text-gray-200">
               Email
             </label>
             <input
@@ -125,14 +125,14 @@ const AuthPage = () => {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none"
+              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none text-gray-200"
               placeholder="Enter your email"
               required
             />
           </div>
 
           <div>
-            <label className="block text-sm mb-1 font-medium text-gray-700">
+            <label className="block text-sm mb-1 font-medium text-gray-200">
               Password
             </label>
             <input
@@ -140,7 +140,7 @@ const AuthPage = () => {
               name="password"
               value={formData.password}
               onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none"
+              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none text-gray-200"
               placeholder="Enter password"
               required
             />
@@ -148,7 +148,7 @@ const AuthPage = () => {
 
           {/* Submit */}
           <button
-            className="w-full bg-blue-700 text-white p-2 rounded-md font-semibold hover:bg-blue-800 transition cursor-pointer mt-2"
+            className="w-full bg-blue-700 text-white p-2 rounded-md font-semibold hover:bg-blue-800 transition cursor-pointer mt-2 "
             type="submit"
           >
             {loading ? (
@@ -161,7 +161,7 @@ const AuthPage = () => {
           </button>
 
           <p className="text-center text-sm mt-2">
-            <Link to="/owner" className="text-blue-700 hover:underline font-medium">
+            <Link to="/owner" className="text-blue-600 hover:underline font-medium">
               Admin Login
             </Link>
           </p>

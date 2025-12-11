@@ -19,7 +19,6 @@ const DetailProd = () => {
       );
 
       toast.success(`Added ${qty} item(s) to Cart 🛒`);
-      console.log(res.data);
     } catch (error) {
       console.log(error);
       toast.error("Please login first!");
@@ -64,7 +63,7 @@ const DetailProd = () => {
             <div className="flex-1 flex justify-center">
               <img
                 className="w-[420px] h-[520px] object-cover rounded-md shadow-md"
-                src={product.image}
+                src={product?.image}
                 alt={product.title}
               />
             </div>
