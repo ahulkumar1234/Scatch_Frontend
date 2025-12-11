@@ -15,7 +15,7 @@ const Cart = () => {
         "https://scatch-backend-41mw.onrender.com/api/v1/cart/cartItems",
         { withCredentials: true }
       );
-      setCartItems(res.data.Cartitems || []);
+      setCartItems(res.data.Cartitems?.items || []);
       console.log(res)
     } catch (error) {
       toast.error(error)
