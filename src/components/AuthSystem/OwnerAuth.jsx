@@ -55,7 +55,7 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-[url('public/images/bg-image.jpg')] bg-cover bg-center px-4">
+    <div className="ownerauth min-h-screen flex justify-center items-center bg-cover bg-center px-4">
       <div className="bg-transparent backdrop-blur-sm border border-gray-200 shadow-lg rounded-xl p-8 w-full max-w-md">
         {/* Logo */}
         <h1 className="text-3xl font-extrabold text-blue-600 text-center mb-4">Scatch Admin</h1>
