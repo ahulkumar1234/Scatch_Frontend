@@ -2,6 +2,7 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import toast from "react-hot-toast";
 import { useAuth } from "../../Context/AuthContext";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
 
@@ -37,7 +38,7 @@ const Navbar = () => {
     <>
       <nav className={`${isLoggedIn ? 'block' : 'hidden'} navbar flex justify-between items-center bg-gray-100 p-5 shadow-lg  w-full z-10 sticky`}>
         <h1 className="navbar-logo text-2xl text-blue-600 font-bold cursor-pointer">Scatch</h1>
-        <div className="links">
+        <div className="links flex justify-center items-center">
           <NavLink
             to='/shop'
             className={({ isActive }) =>
@@ -64,11 +65,11 @@ const Navbar = () => {
             to='/cart'
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold mx-2.5"
-                : "mx-2.5 hover:text-blue-600 transition-all"
+                ? "text-blue-600 font-semibold mx-2.5 text-xl"
+                : "mx-2.5 hover:text-blue-600 transition-all text-xl "
             }
           >
-            Cart
+            <FaShoppingCart />
           </NavLink>
           <button onClick={handelLogout} className="text-red-600 mx-2.5 cursor-pointer">Logout</button>
         </div>

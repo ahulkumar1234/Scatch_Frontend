@@ -55,13 +55,17 @@ const Cart = () => {
     );
   }
 
-  if (!cartItems || cartItems.items?.length === 0) {
-    return (
-      <h2 className="flex justify-center items-center h-screen text-xl">
-        Cart is Empty 🛒
-      </h2>
-    );
-  }
+ if (!cartItems || !cartItems.items || cartItems.items.length === 0) {
+  return (
+    <div className="flex flex-col justify-center items-center h-screen gap-4 bg-gray-100">
+      <span className="text-7xl">🛒</span>
+      <h2 className="text-2xl font-bold">Your cart is empty</h2>
+      <p className="text-gray-500">Looks like you removed all items</p>
+    </div>
+  );
+}
+
+
 
   const totalPrice = cartItems.items.reduce(
     (acc, item) =>
