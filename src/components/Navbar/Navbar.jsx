@@ -24,8 +24,7 @@ const Navbar = () => {
         }
       );
       toast.success(res.data.message);
-      // alert('Are you sure! Do you want to logout');
-
+      // window.confirm('Are you sure! Do you want to logout');
       setIsLoggedIn(false);
       navigate('/');
     } catch (error) {

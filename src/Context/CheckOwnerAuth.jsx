@@ -7,7 +7,7 @@ export const OwnerAuthContext = createContext();
 
 export const OwnerAuthProvider = ({ children }) => {
 
-    const [isloggedIn, setIsLoggedIn] = useState();
+    const [isloggedIn, setIsLoggedIn] = useState(null);
 
     const checkLogin = async () => {
         try {
@@ -15,8 +15,7 @@ export const OwnerAuthProvider = ({ children }) => {
             setIsLoggedIn(res.data.OwnerLoggedin);
 
         } catch (error) {
-            setIsLoggedIn(false)
-            toast.error(error.message)
+            setIsLoggedIn(false);
         }
     }
 

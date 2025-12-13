@@ -96,25 +96,25 @@ const OwnerPanel = () => {
         <h1 className="text-xl text-blue-600 font-bold">Scatch <span className='text-black font-semibold'>Owner Panel</span></h1>
 
         {/* Links */}
-        <div className="links mt-9">
+        <div className="links mt-5">
           <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
         </div>
-        <div className="links mt-9">
+        <div className="links mt-5">
           <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
         </div>
-        <div className="links mt-9">
+        <div className="links mt-5">
           <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
         </div>
-        <div className="links mt-9">
+        <div className="links mt-5">
           <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
         </div>
-        <div className="links mt-9">
+        <div className="links mt-5">
           <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
         </div>
 
 
         {/* signout */}
-        <div className="signout mt-9 flex justify-center">
+        <div className="signout mt-9 flex justify-end">
           <button
             onClick={handleSingout}
             className='text-red-700 transition-all duration-200 ease-in-out font-semibold bg-red-100 px-5 py-2 flex justify-center items-center gap-2 w-full cursor-pointer active:scale-95'><CiLogout className='text-xl' /><span>Signout</span>
