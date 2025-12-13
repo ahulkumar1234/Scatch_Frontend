@@ -1,11 +1,12 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";              // <-- FIXED (was missing)
+import toast from "react-hot-toast";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(null); // <-- null, not false (prevents redirect issues)
-  
+  const [isLoggedIn, setIsLoggedIn] = useState(); // <-- null, not false (prevents redirect issues)
+
   const checkLogin = async () => {
     try {
 
@@ -16,6 +17,7 @@ export const AuthProvider = ({ children }) => {
       setIsLoggedIn(res.data.loggedIn);
     } catch (error) {
       setIsLoggedIn(false);
+      toast.error(error.message);
     }
   };
 

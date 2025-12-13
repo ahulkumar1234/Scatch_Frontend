@@ -5,7 +5,8 @@ import { Link } from 'react-router-dom';
 import PulseLoader from "react-spinners/PulseLoader";
 import { FaStore } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
-
+import { useOwnerAuth } from '../../Context/CheckOwnerAuth';
+import { useNavigate } from 'react-router-dom';
 
 const OwnerPanel = () => {
 
@@ -23,7 +24,6 @@ const OwnerPanel = () => {
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
-
 
   const handleImage = (e) => {
     setFormData({
@@ -47,7 +47,7 @@ const OwnerPanel = () => {
       form.append("image", formData.image);
 
       const res = await axios.post('https://scatch-backend-41mw.onrender.com/api/v1/products/create', form, {
-        headers: { "Content-Type": "multipart/form-data" }
+        headers: { "Content-Type": "multipart/form-data" }, withCredentials: true
       });
 
       toast.success('Product Created Successfully!');
@@ -65,6 +65,24 @@ const OwnerPanel = () => {
     } catch (error) {
       setLoading(false);
       toast.error(error.response?.data?.message || "Something went wrong");
+    }
+  }
+
+
+  // SignOut logic
+  const { isloggedIn, setIsLoggedIn } = useOwnerAuth();
+  const navigate = useNavigate();
+
+  const handleSingout = async () => {
+    try {
+
+      const res = await axios.post('https://scatch-backend-41mw.onrender.com/api/v1/owners/signout', {}, { withCredentials: true });
+      setIsLoggedIn(false);
+      toast.success(res.data.message);
+      navigate('/')
+      console.log(res)
+    } catch (error) {
+      toast.error(error.message)
     }
   }
 
@@ -98,7 +116,9 @@ const OwnerPanel = () => {
         {/* signout */}
         <div className="signout mt-9 flex justify-center">
           <button
-            className='text-red-700 transition-all duration-200 ease-in-out font-semibold bg-red-100 px-5 py-2 flex justify-center items-center gap-2 w-full cursor-pointer active:scale-95'><CiLogout className='text-xl' /><span>Signout</span></button>
+            onClick={handleSingout}
+            className='text-red-700 transition-all duration-200 ease-in-out font-semibold bg-red-100 px-5 py-2 flex justify-center items-center gap-2 w-full cursor-pointer active:scale-95'><CiLogout className='text-xl' /><span>Signout</span>
+          </button>
         </div>
 
       </div>
