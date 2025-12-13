@@ -4,6 +4,7 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 
+
 const Cart = () => {
   const [cartItems, setCartItems] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -15,7 +16,7 @@ const Cart = () => {
         "https://scatch-backend-41mw.onrender.com/api/v1/cart/cartItems",
         { withCredentials: true }
       );
-      setCartItems(res.data.Cartitems?.items || []);
+      setCartItems(res.data.Cartitems);
       console.log(res)
     } catch (error) {
       toast.error(error)
@@ -26,10 +27,11 @@ const Cart = () => {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (productId) => {
 
     try {
-      const res = await axios.delete(`https://scatch-backend-41mw.onrender.com/api/v1/cart/delete/${id}`,
+      // const userId = cartItems?.userId;
+      const res = await axios.delete(`https://scatch-backend-41mw.onrender.com/api/v1/cart/delete/${productId}`,
         { withCredentials: true }
       );
 
@@ -53,7 +55,7 @@ const Cart = () => {
     );
   }
 
-  if (!cartItems || cartItems.length === 0) {
+  if (!cartItems || cartItems.items?.length === 0) {
     return (
       <h2 className="flex justify-center items-center h-screen text-xl">
         Cart is Empty 🛒
@@ -61,7 +63,7 @@ const Cart = () => {
     );
   }
 
-  const totalPrice = cartItems.reduce(
+  const totalPrice = cartItems.items.reduce(
     (acc, item) =>
       item.productId ? acc + item.productId.price * item.quantity : acc,
     0
@@ -75,7 +77,7 @@ const Cart = () => {
           Your Cart ({cartItems.length})
         </h1>
 
-        {cartItems.map((item) => {
+        {cartItems?.items?.map((item) => {
           if (!item.productId) return null; // skip null products
           return (
             <div key={item._id} className="flex items-center gap-6 border-b py-4">
@@ -99,7 +101,7 @@ const Cart = () => {
                   Qty: {item.quantity}
                 </p>
                 <button
-                  onClick={() => handleDelete(item._id)}
+                  onClick={() => handleDelete(item.productId._id)}
                   className="text-3xl text-red-600 cursor-pointer active:scale-90 transition-all duration-300 ease-in-out">
                   <MdDelete />
                 </button>

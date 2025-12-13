@@ -4,6 +4,7 @@ import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
 import PulseLoader from "react-spinners/PulseLoader";
 import { FaStore } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
 
 
 const OwnerPanel = () => {
@@ -68,6 +69,7 @@ const OwnerPanel = () => {
   }
 
 
+
   return (
     <div className="flex">
 
@@ -79,6 +81,26 @@ const OwnerPanel = () => {
         <div className="links mt-9">
           <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
         </div>
+        <div className="links mt-9">
+          <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
+        </div>
+        <div className="links mt-9">
+          <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
+        </div>
+        <div className="links mt-9">
+          <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
+        </div>
+        <div className="links mt-9">
+          <Link className='text-blue-700 hover:border transition-all duration-200 ease-in-out font-semibold bg-blue-100 px-5 py-2 flex justify-center items-center gap-2' to='/ownerstore'><FaStore /><span>Store</span></Link>
+        </div>
+
+
+        {/* signout */}
+        <div className="signout mt-9 flex justify-center">
+          <button
+            className='text-red-700 transition-all duration-200 ease-in-out font-semibold bg-red-100 px-5 py-2 flex justify-center items-center gap-2 w-full cursor-pointer active:scale-95'><CiLogout className='text-xl' /><span>Signout</span></button>
+        </div>
+
       </div>
 
       {/* Product Form Section */}

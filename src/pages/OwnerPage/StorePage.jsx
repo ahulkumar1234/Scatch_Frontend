@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import ClockLoader from "react-spinners/ClockLoader"
-import HashLoader from "react-spinners/HashLoader"
+import PuffLoader from "react-spinners/PuffLoader"
 import { FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 
@@ -44,7 +44,7 @@ const StorePage = () => {
     if (prodloading) {
         return (
             <div className='flex justify-center items-center w-full h-screen'>
-                <HashLoader color='blue' />
+                <PuffLoader color='blue' size={100} />
             </div>
         )
     }
