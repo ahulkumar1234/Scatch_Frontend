@@ -18,7 +18,7 @@ const DetailProd = () => {
         { withCredentials: true }
       );
 
-      toast.success(`Added ${qty} item(s) to Cart 🛒`);
+      toast.success(`Added ${qty} item's to cart 🛒`);
     } catch (error) {
       console.log(error);
       toast.error("Please login first!");

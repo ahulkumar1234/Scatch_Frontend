@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import ClockLoader from "react-spinners/ClockLoader"
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
 
@@ -8,6 +9,7 @@ import { MdDelete } from "react-icons/md";
 const Cart = () => {
   const [cartItems, setCartItems] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [deleteLoading, setDeleteLoading] = useState(null);
 
 
   const fetchCartItems = async () => {
@@ -30,16 +32,17 @@ const Cart = () => {
   const handleDelete = async (productId) => {
 
     try {
+      setDeleteLoading(productId)
       // const userId = cartItems?.userId;
       const res = await axios.delete(`https://scatch-backend-41mw.onrender.com/api/v1/cart/delete/${productId}`,
         { withCredentials: true }
       );
-
-      console.log(res.data)
+      toast.success(res.data.message)
       fetchCartItems();
-
     } catch (error) {
       toast.error(error.message)
+    } finally {
+      setDeleteLoading(null)
     }
   }
 
@@ -55,15 +58,15 @@ const Cart = () => {
     );
   }
 
- if (!cartItems || !cartItems.items || cartItems.items.length === 0) {
-  return (
-    <div className="flex flex-col justify-center items-center h-screen gap-4 bg-gray-100">
-      <span className="text-7xl">🛒</span>
-      <h2 className="text-2xl font-bold">Your cart is empty</h2>
-      <p className="text-gray-500">Looks like you removed all items</p>
-    </div>
-  );
-}
+  if (!cartItems || !cartItems.items || cartItems.items.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen gap-4 bg-gray-100">
+        <span className="text-7xl">🛒</span>
+        <h2 className="text-2xl font-bold">Your cart is empty</h2>
+        <p className="text-gray-500">Looks like you removed all items</p>
+      </div>
+    );
+  }
 
 
 
@@ -78,7 +81,7 @@ const Cart = () => {
       <div className="w-6xl mx-auto bg-white shadow-md p-6 rounded-md">
 
         <h1 className="text-2xl font-bold mb-6">
-          Your Cart ({cartItems.length})
+          Your Cart ({cartItems.items.length})
         </h1>
 
         {cartItems?.items?.map((item) => {
@@ -105,15 +108,27 @@ const Cart = () => {
                   Qty: {item.quantity}
                 </p>
                 <button
+                  disabled={loading === item.productId._id}
                   onClick={() => handleDelete(item.productId._id)}
-                  className="text-3xl text-red-600 cursor-pointer active:scale-90 transition-all duration-300 ease-in-out">
-                  <MdDelete />
+                  className="text-3xl flex justify-center items-center text-red-600 cursor-pointer active:scale-90 transition-all duration-300 ease-in-out disabled:opacity-50">
+
+                  {deleteLoading === item.productId._id
+                    ? <ClockLoader size={24} color="red" />
+                    : <MdDelete />}
                 </button>
+
               </div>
 
             </div>
           );
         })}
+
+
+        <div className={`flex justify-center items-center m-5 bg-blue-600 hover:bg-blue-700 py-2 ${!cartItems || !cartItems.items || cartItems.items.length === 0 ? "hidden" : "block"}
+             text-white font-semibold rounded active:scale-95 
+             cursor-pointer transition-all duration-300 ease-in-out`}>
+          <button className="cursor-pointer">Checkout</button>
+        </div>
 
         <div className="mt-6 flex justify-between items-center text-xl font-bold">
           <span>Total Amount:</span>
