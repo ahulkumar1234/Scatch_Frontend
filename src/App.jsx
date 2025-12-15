@@ -13,6 +13,9 @@ import Cart from './pages/CartPage/Cart';
 import DetailProd from './pages/ProductDetails/DetailProd';
 import StorePage from './pages/OwnerPage/StorePage';
 import { OwnerAuthProvider } from './Context/CheckOwnerAuth';
+import Address from './pages/AdressPage/Address';
+import Payment from './pages/Payment.jsx/Payment';
+import Summary from './pages/Order-SummaryPage/Summary';
 
 function App() {
 
@@ -38,6 +41,9 @@ function App() {
             <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
             <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
             <Route path="/details/:id" element={<ProtectedRoute><DetailProd /></ProtectedRoute>} />
+            <Route path='/checkout/address' element={<Address/>}/>
+            <Route path='/checkout/payment' element={<Payment/>}/>
+            <Route path='/checkout/summary' element={<Summary/>}/>
           </Routes>
 
         </AuthProvider>
