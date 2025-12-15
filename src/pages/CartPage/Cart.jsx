@@ -11,6 +11,53 @@ const Cart = () => {
   const [loading, setLoading] = useState(true);
   const [deleteLoading, setDeleteLoading] = useState(null);
 
+  // cart items ko orderItems me convert
+  const handleCheckout = async () => {
+    try {
+      const orderItems = cartItems.items
+      .filter(item => item.productId) // 🔥 IMPORTANT FIX
+      .map(item => ({
+        productId: item.productId._id,
+        quantity: item.quantity,
+      }));
+
+    if (orderItems.length === 0) {
+      toast.error("No valid products in cart");
+      return;
+    }
+
+      // Temporary address (next step me form banayenge)
+      const shippingAddress = {
+        fullName: "Rahul Kumar",
+        phone: "9876543210",
+        address: "Main Road",
+        city: "Ranchi",
+        pincode: "834001",
+      };
+
+      const paymentMethod = "COD";
+
+      const res = await axios.post(
+        "https://scatch-backend-41mw.onrender.com/api/v1/orders/create",
+        {
+          orderItems,
+          shippingAddress,
+          paymentMethod,
+        },
+        { withCredentials: true }
+      );
+
+      toast.success("Order placed successfully!");
+      console.log(res.data);
+
+      // OPTIONAL: cart clear / redirect
+      // navigate("/order-success");
+
+    } catch (error) {
+       console.log("ORDER ERROR:", error.response?.data || error.message);
+      toast.error(error.response?.data?.message || "Order failed");
+    }
+  }
 
   const fetchCartItems = async () => {
     try {
@@ -19,10 +66,8 @@ const Cart = () => {
         { withCredentials: true }
       );
       setCartItems(res.data.Cartitems);
-      console.log(res)
     } catch (error) {
       toast.error(error)
-      console.log(error)
       setCartItems([]);
     } finally {
       setLoading(false);
@@ -127,7 +172,13 @@ const Cart = () => {
         <div className={`flex justify-center items-center m-5 bg-blue-600 hover:bg-blue-700 py-2 ${!cartItems || !cartItems.items || cartItems.items.length === 0 ? "hidden" : "block"}
              text-white font-semibold rounded active:scale-95 
              cursor-pointer transition-all duration-300 ease-in-out`}>
-          <button className="cursor-pointer">Checkout</button>
+          <button
+            onClick={handleCheckout}
+            className="cursor-pointer"
+          >
+            Checkout
+          </button>
+
         </div>
 
         <div className="mt-6 flex justify-between items-center text-xl font-bold">

@@ -148,7 +148,7 @@ const AuthPage = () => {
 
           {/* Submit */}
           <button
-            className="w-full bg-blue-700 text-white p-2 rounded-md font-semibold hover:bg-blue-800 transition cursor-pointer mt-2 "
+            className={`w-full bg-blue-700 text-white p-2 rounded-md font-semibold hover:bg-blue-800 transition cursor-pointer mt-2`}
             type="submit"
           >
             {loading ? (
