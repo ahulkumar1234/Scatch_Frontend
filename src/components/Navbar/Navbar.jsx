@@ -38,7 +38,7 @@ const Navbar = () => {
     <>
       <nav className={`${isLoggedIn ? 'block' : 'hidden'} navbar flex justify-between items-center bg-gray-100 p-5 shadow-lg  w-full z-10 sticky`}>
         <h1 className="navbar-logo text-2xl text-blue-600 font-bold cursor-pointer">Scatch</h1>
-        <div className="links flex justify-center items-center md:gap-4 gap-2.5">
+        <div className="links flex justify-center items-center md:gap-4 gap-2.5 text-sm">
           <NavLink
             to='/home'
             className={({ isActive }) =>
@@ -82,7 +82,7 @@ const Navbar = () => {
           >
            <span className="text-[17px]">Cart</span><FaShoppingCart />
           </NavLink>
-          <button onClick={handelLogout} className="bg-red-500 px-1 py-0.5 text-sm md:px-3 md:py-1 rounded active:scale-95 transition-all duration-300 ease-in-out text-white cursor-pointer">Logout</button>
+          <button onClick={handelLogout} className="bg-red-500 px-1.5 py-1 text-sm md:px-3 md:py-1 rounded active:scale-95 transition-all duration-300 ease-in-out text-white cursor-pointer">Logout</button>
         </div>
       </nav>
     </>
