@@ -3,6 +3,7 @@ import axios from 'axios';
 import toast from "react-hot-toast";
 import { useAuth } from "../../Context/AuthContext";
 import { FaShoppingCart } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
 
 const Navbar = () => {
 
@@ -38,6 +39,27 @@ const Navbar = () => {
     <>
       <nav className={`${isLoggedIn ? 'block' : 'hidden'} navbar flex justify-between items-center bg-gray-100 p-5 shadow-lg  w-full z-10 sticky`}>
         <h1 className="navbar-logo text-2xl text-blue-600 font-bold cursor-pointer">Scatch</h1>
+        <div className="relative max-w-md mx-auto">
+          <CiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-gray-400" />
+
+          <input
+            type="search"
+            placeholder="Search your bag"
+            className="
+             w-full
+             pl-12 pr-4 py-2
+             rounded-full
+             bg-gray-100
+             text-gray-700
+             placeholder-gray-400
+             outline-none
+             border border-gray-300
+             transition-all
+             shadow-sm
+            "
+          />
+        </div>
+
         <div className="links flex justify-center items-center md:gap-4 gap-2.5 text-sm">
           <NavLink
             to='/home'
@@ -80,7 +102,7 @@ const Navbar = () => {
                 : "hover:text-blue-600 transition-all text-lg flex justify-center items-center"
             }
           >
-           <span className="text-[15px]">Cart</span><FaShoppingCart />
+            <span className="text-[15px]">Cart</span><FaShoppingCart />
           </NavLink>
           <button onClick={handelLogout} className="bg-red-500 px-1.5 py-1 text-sm md:px-3 md:py-1 rounded active:scale-95 transition-all duration-300 ease-in-out text-white cursor-pointer">Logout</button>
         </div>

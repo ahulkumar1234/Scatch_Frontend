@@ -90,7 +90,7 @@ const StorePage = () => {
 
             <div className="text-blue-600 flex justify-end mx-5">
                 <button
-                    className='hover:underline font-semibold'
+                    className='hover:underline font-semibold cursor-pointer'
                     onClick={() => navigate('/ownerpanel')}
                 >
                     ← Back to Panel
@@ -168,14 +168,14 @@ const StorePage = () => {
                                     setEditProduct(item)
                                     setEditData(item)
                                 }}
-                                className="bg-yellow-500 text-white px-3 py-1 rounded"
+                                className="bg-yellow-500 text-white px-3 py-1 rounded cursor-pointer"
                             >
                                 <FaEdit />
                             </button>
 
                             <button
                                 onClick={() => handleDelete(item._id)}
-                                className="bg-red-600 text-white px-3 py-1 rounded"
+                                className="bg-red-600 text-white px-3 py-1 rounded cursor-pointer"
                             >
                                 {loading === item._id
                                     ? <ClockLoader size={18} color="#fff" />
@@ -195,7 +195,7 @@ const StorePage = () => {
                         {["title", "description", "price", "stock"].map(field => (
                             <input
                                 key={field}
-                                className="border p-2 w-full mb-2"
+                                className="border border-gray-300 rounded p-2 w-full mb-2"
                                 value={editData[field]}
                                 onChange={(e) =>
                                     setEditData({ ...editData, [field]: e.target.value })
@@ -206,14 +206,14 @@ const StorePage = () => {
                         <div className="flex justify-between mt-3">
                             <button
                                 onClick={() => setEditProduct(null)}
-                                className="bg-gray-400 text-white px-4 py-1 rounded"
+                                className="bg-gray-400 text-white px-4 py-1 rounded cursor-pointer"
                             >
                                 Cancel
                             </button>
 
                             <button
                                 onClick={() => handleUpdate(editProduct._id)}
-                                className="bg-blue-600 text-white px-4 py-1 rounded"
+                                className="bg-blue-600 text-white px-4 py-1 rounded cursor-pointer"
                             >
                                 Save
                             </button>
