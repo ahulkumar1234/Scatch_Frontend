@@ -38,13 +38,13 @@ const Navbar = () => {
     <>
       <nav className={`${isLoggedIn ? 'block' : 'hidden'} navbar flex justify-between items-center bg-gray-100 p-5 shadow-lg  w-full z-10 sticky`}>
         <h1 className="navbar-logo text-2xl text-blue-600 font-bold cursor-pointer">Scatch</h1>
-        <div className="links flex justify-center items-center">
+        <div className="links flex justify-center items-center md:gap-4 gap-2.5">
           <NavLink
             to='/home'
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold mx-2.5"
-                : "mx-2.5 hover:text-blue-600 transition-all"
+                ? "text-blue-600 font-semibold "
+                : "hover:text-blue-600 transition-all"
             }
           >
             Home
@@ -54,8 +54,8 @@ const Navbar = () => {
             to='/shop'
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold mx-2.5"
-                : "mx-2.5 hover:text-blue-600 transition-all"
+                ? "text-blue-600 font-semibold "
+                : "hover:text-blue-600 transition-all"
             }
           >
             Shop
@@ -65,8 +65,8 @@ const Navbar = () => {
             to='/about'
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold mx-2.5"
-                : "mx-2.5 hover:text-blue-600 transition-all"
+                ? "text-blue-600 font-semibold "
+                : "hover:text-blue-600 transition-all"
             }
           >
             About
@@ -76,13 +76,13 @@ const Navbar = () => {
             to='/cart'
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold mx-2.5 text-xl flex justify-center items-center"
-                : "mx-2.5 hover:text-blue-600 transition-all text-xl flex justify-center items-center"
+                ? "text-blue-600 font-semibold  text-xl flex justify-center items-center"
+                : "hover:text-blue-600 transition-all text-xl flex justify-center items-center"
             }
           >
            <span className="text-[17px]">Cart</span><FaShoppingCart />
           </NavLink>
-          <button onClick={handelLogout} className="bg-red-500 px-3 py-1 rounded active:scale-95 transition-all duration-300 ease-in-out text-white mx-2.5 cursor-pointer">Logout</button>
+          <button onClick={handelLogout} className="bg-red-500 px-1 py-0.5 text-sm md:px-3 md:py-1 rounded active:scale-95 transition-all duration-300 ease-in-out text-white cursor-pointer">Logout</button>
         </div>
       </nav>
     </>
