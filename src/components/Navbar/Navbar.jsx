@@ -76,11 +76,11 @@ const Navbar = () => {
             to='/cart'
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold  text-xl flex justify-center items-center"
-                : "hover:text-blue-600 transition-all text-xl flex justify-center items-center"
+                ? "text-blue-600 font-semibold flex text-lg justify-center items-center"
+                : "hover:text-blue-600 transition-all text-lg flex justify-center items-center"
             }
           >
-           <span className="text-[17px]">Cart</span><FaShoppingCart />
+           <span className="text-[15px]">Cart</span><FaShoppingCart />
           </NavLink>
           <button onClick={handelLogout} className="bg-red-500 px-1.5 py-1 text-sm md:px-3 md:py-1 rounded active:scale-95 transition-all duration-300 ease-in-out text-white cursor-pointer">Logout</button>
         </div>
