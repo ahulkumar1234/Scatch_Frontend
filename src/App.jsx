@@ -16,6 +16,7 @@ import { OwnerAuthProvider } from './Context/CheckOwnerAuth';
 import Address from './pages/AdressPage/Address';
 import Payment from './pages/Payment.jsx/Payment';
 import Summary from './pages/Order-SummaryPage/Summary';
+import Home from './pages/HomePage/Home';
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
             <Route path="/ownerpanel" element={<OwnerPanel />} />
             <Route path="/ownerstore" element={<StorePage />} />
 
+            <Route path='/home' element={<Home/>}/>
             <Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />
             <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
             <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />

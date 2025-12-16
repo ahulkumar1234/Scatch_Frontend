@@ -40,7 +40,7 @@ const Navbar = () => {
         <h1 className="navbar-logo text-2xl text-blue-600 font-bold cursor-pointer">Scatch</h1>
         <div className="links flex justify-center items-center">
           <NavLink
-            to='/shop'
+            to='/home'
             className={({ isActive }) =>
               isActive
                 ? "text-blue-600 font-semibold mx-2.5"
@@ -48,6 +48,17 @@ const Navbar = () => {
             }
           >
             Home
+          </NavLink>
+
+          <NavLink
+            to='/shop'
+            className={({ isActive }) =>
+              isActive
+                ? "text-blue-600 font-semibold mx-2.5"
+                : "mx-2.5 hover:text-blue-600 transition-all"
+            }
+          >
+            Shop
           </NavLink>
 
           <NavLink
@@ -65,13 +76,13 @@ const Navbar = () => {
             to='/cart'
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold mx-2.5 text-xl"
-                : "mx-2.5 hover:text-blue-600 transition-all text-xl "
+                ? "text-blue-600 font-semibold mx-2.5 text-xl flex justify-center items-center"
+                : "mx-2.5 hover:text-blue-600 transition-all text-xl flex justify-center items-center"
             }
           >
-            <FaShoppingCart />
+           <span className="text-[17px]">Cart</span><FaShoppingCart />
           </NavLink>
-          <button onClick={handelLogout} className="text-red-600 mx-2.5 cursor-pointer">Logout</button>
+          <button onClick={handelLogout} className="bg-red-500 px-3 py-1 rounded active:scale-95 transition-all duration-300 ease-in-out text-white mx-2.5 cursor-pointer">Logout</button>
         </div>
       </nav>
     </>

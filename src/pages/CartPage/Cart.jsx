@@ -4,59 +4,13 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import ClockLoader from "react-spinners/ClockLoader"
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
-import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deleteLoading, setDeleteLoading] = useState(null);
 
-  const navigate = useNavigate();
-  // cart items ko orderItems me convert
-  const handleCheckout = async () => {
-    try {
-      const orderItems = cartItems.items
-        .filter(item => item.productId) // 🔥 IMPORTANT FIX
-        .map(item => ({
-          productId: item.productId._id,
-          quantity: item.quantity,
-        }));
-
-      if (orderItems.length === 0) {
-        toast.error("No valid products in cart");
-        return;
-      }
-
-      // Temporary address (next step me form banayenge)
-      const shippingAddress = {
-        fullName: "Rahul Kumar",
-        phone: "9876543210",
-        address: "Main Road",
-        city: "Ranchi",
-        pincode: "834001",
-      };
-
-      const paymentMethod = "COD";
-
-      const res = await axios.post(
-        "https://scatch-backend-41mw.onrender.com/api/v1/orders/create",
-        {
-          orderItems,
-          shippingAddress,
-          paymentMethod,
-        },
-        { withCredentials: true }
-      );
-
-      toast.success("Order placed successfully!");
-      setCartItems({ items: [] });
-      console.log(res)
-      //navigate("/order-success");
-
-    } catch (error) {
-      toast.error(error.response?.data?.message || "Order failed");
-    }
-  }
+  
 
   const fetchCartItems = async () => {
     try {
@@ -81,8 +35,8 @@ const Cart = () => {
       const res = await axios.delete(`https://scatch-backend-41mw.onrender.com/api/v1/cart/delete/${productId}`,
         { withCredentials: true }
       );
-      toast.success(res.data.message)
       fetchCartItems();
+      toast.success(res.data.message)
     } catch (error) {
       toast.error(error.message)
     } finally {
@@ -172,7 +126,6 @@ const Cart = () => {
              text-white font-semibold rounded active:scale-95 
              cursor-pointer transition-all duration-300 ease-in-out`}>
           <button
-            onClick={() =>  navigate('/checkout/address') }
             className="cursor-pointer w-full h-10"
           >
             Checkout
