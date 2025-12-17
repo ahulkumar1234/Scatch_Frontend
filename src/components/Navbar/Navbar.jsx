@@ -4,6 +4,10 @@ import toast from "react-hot-toast";
 import { useAuth } from "../../Context/AuthContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { CiSearch } from "react-icons/ci";
+import { RxCross1 } from "react-icons/rx";
+import { useState } from "react";
+import { FaBars } from "react-icons/fa";
+
 
 const Navbar = () => {
 
@@ -12,6 +16,8 @@ const Navbar = () => {
   if (location.pathname === "/owner" || location.pathname === "/ownerpanel") {
     return null; // navbar hide
   }
+
+  const [menuopen, setmenuOpen] = useState(false);
 
 
   const { setIsLoggedIn, isLoggedIn } = useAuth();
@@ -37,76 +43,154 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`${isLoggedIn ? 'block' : 'hidden'} navbar flex justify-between items-center bg-gray-100 p-5 shadow-lg  w-full z-10 sticky`}>
-        <h1 className="navbar-logo text-2xl text-blue-600 font-bold cursor-pointer">Scatch</h1>
-        <div className="relative max-w-md mx-auto">
-          <CiSearch className="absolute left-4 top-1/2 -translate-y-1/2 text-xl text-gray-400" />
+      <nav className={`${isLoggedIn ? 'block' : 'hidden'} fixed top-0 left-0 w-full z-50 bg-gray-100 shadow-md`}>
+        <div className="flex justify-between items-center h-17 p-4 md:p-5">
 
-          <input
-            type="search"
-            placeholder="Search your bag"
-            className="
-             w-full
-             pl-12 pr-4 py-2
-             rounded-full
-             bg-gray-100
-             text-gray-700
-             placeholder-gray-400
-             outline-none
-             border border-gray-300
-             transition-all
-             shadow-sm
-            "
+          {/* Logo */}
+          <h1 className="text-2xl text-blue-600 font-bold cursor-pointer">
+            Scatch
+          </h1>
+
+          {/* Search (Desktop only) */}
+          <div className="relative hidden md:block">
+            <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-xl text-gray-400" />
+            <input
+              type="search"
+              placeholder="Search your bag"
+              className="w-[280px] pl-9 pr-4 py-2 border border-gray-400 rounded outline-none"
+            />
+          </div>
+
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-4 text-md">
+            <NavLink
+              to="/home"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 font-semibold"
+                  : "hover:text-blue-600 transition-all"
+              }
+            >
+              Home
+            </NavLink>
+
+            <NavLink
+              to="/shop"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 font-semibold"
+                  : "hover:text-blue-600 transition-all"
+              }
+            >
+              Shop
+            </NavLink>
+
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 font-semibold"
+                  : "hover:text-blue-600 transition-all"
+              }
+            >
+              About
+            </NavLink>
+
+            <NavLink
+              to="/cart"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-blue-600 font-semibold flex items-center gap-1"
+                  : "hover:text-blue-600 transition-all flex items-center gap-1"
+              }
+            >
+              Cart <FaShoppingCart />
+            </NavLink>
+
+            <button
+              onClick={handelLogout}
+              className="bg-red-500 px-3 py-1 rounded text-white active:scale-95 transition-all ease-in-out duration-200 cursor-pointer"
+            >
+              Logout
+            </button>
+          </div>
+
+          {/* Hamburger (Mobile only) */}
+          <FaBars
+            className="text-2xl md:hidden cursor-pointer"
+            onClick={() => setmenuOpen(true)}
           />
         </div>
 
-        <div className="links flex justify-center items-center md:gap-4 gap-2.5 text-sm">
+        {/* ================= MOBILE MENU ================= */}
+        <div
+          className={`fixed top-0 right-0 h-screen w-[90%] bg-gray-900 text-white flex flex-col items-center justify-center gap-8 text-2xl transform transition-transform duration-300
+         ${menuopen ? "translate-x-0" : "translate-x-full"}`}
+        >
+          {/* Close Icon */}
+          <RxCross1
+            className="absolute top-5 right-5 text-2xl cursor-pointer"
+            onClick={() => setmenuOpen(false)}
+          />
+
           <NavLink
-            to='/home'
+            to="/home"
+            onClick={() => setmenuOpen(false)}
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold "
-                : "hover:text-blue-600 transition-all"
+                ? "text-blue-500 font-semibold"
+                : "hover:text-blue-500 transition-all"
             }
           >
             Home
           </NavLink>
 
           <NavLink
-            to='/shop'
+            to="/shop"
+            onClick={() => setmenuOpen(false)}
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold "
-                : "hover:text-blue-600 transition-all"
+                ? "text-blue-500 font-semibold"
+                : "hover:text-blue-500 transition-all"
             }
           >
             Shop
           </NavLink>
 
           <NavLink
-            to='/about'
+            to="/about"
+            onClick={() => setmenuOpen(false)}
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold "
-                : "hover:text-blue-600 transition-all"
+                ? "text-blue-500 font-semibold"
+                : "hover:text-blue-500 transition-all"
             }
           >
             About
           </NavLink>
 
           <NavLink
-            to='/cart'
+            to="/cart"
+            onClick={() => setmenuOpen(false)}
             className={({ isActive }) =>
               isActive
-                ? "text-blue-600 font-semibold flex text-lg justify-center items-center"
-                : "hover:text-blue-600 transition-all text-lg flex justify-center items-center"
+                ? "text-blue-500 font-semibold flex items-center gap-2"
+                : "hover:text-blue-500 transition-all flex items-center gap-2"
             }
           >
-            <span className="text-[15px]">Cart</span><FaShoppingCart />
+            Cart <FaShoppingCart />
           </NavLink>
-          <button onClick={handelLogout} className="bg-red-500 px-1.5 py-1 text-sm md:px-3 md:py-1 rounded active:scale-95 transition-all duration-300 ease-in-out text-white cursor-pointer">Logout</button>
+
+          <button
+            onClick={handelLogout}
+            className="bg-red-500 px-5 py-1.5 rounded text-lg active:scale-95 transition-all ease-in-out duration-200 cursor-pointer"
+          >
+            Logout
+          </button>
         </div>
       </nav>
+
+
     </>
   )
 }

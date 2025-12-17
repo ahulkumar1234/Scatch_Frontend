@@ -62,7 +62,7 @@ const DetailProd = () => {
             {/* Product Image */}
             <div className="flex-1 flex justify-center">
               <img
-                className="w-[420px] h-[520px] object-cover rounded-md shadow-md"
+                className="w-[500px] h-[500px] object-cover rounded-md shadow-md"
                 src={product?.image}
                 alt={product.title}
               />

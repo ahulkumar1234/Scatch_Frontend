@@ -13,6 +13,7 @@ const Shop = () => {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [menuopen, setmenuOpen] = useState(false)
 
   const fetchProducts = async () => {
     setLoading(true)
@@ -36,35 +37,33 @@ const Shop = () => {
 
   return (
     <>
-
-      <div className="flex gap- p-5">
-
+      <div className="flex p-5">
         {/* LEFT SIDEBAR */}
-        <div className="left-menu w-48 flex flex-col gap-4 bg-white shadow-md p-4 ">
+        {/* <div className="left-menu w-48 flex flex-col gap-4 bg-white shadow-md p-5">
           <NavLink to="/orders" className='hover:underline transition-all ease-in-out flex justify-center items-center gap-2 bg-blue-100 p-2'>Orders  <FaCartShopping /></NavLink>
           <NavLink to="/ratings" className='hover:underline transition-all ease-in-out flex justify-center items-center gap-2 bg-blue-100 p-2'>Ratings<MdOutlineReviews /></NavLink>
           <NavLink to="/shop" className='hover:underline transition-all ease-in-out flex justify-center items-center gap-2 bg-blue-100 p-2'>Material<SiMaterialdesignicons /></NavLink>
           <NavLink to="/shop" className='hover:underline transition-all ease-in-out flex justify-center items-center gap-2 bg-blue-100 p-2'>Brand<MdOutlineBrandingWatermark /></NavLink>
-        </div>
+        </div> */}
 
         {/* PRODUCTS SECTION */}
-        <div className="flex flex-wrap gap-5 justify-end flex-grow">
+        <div className="flex flex-wrap gap-5 justify-center">
           {products.map((item) => (
             <NavLink to={`/details/${item._id}`} key={item._id}>
-              <div className="bg-white shadow-lg p-4 cursor-pointer hover:scale-105 transition ease-in">
+              <div className="bg-white w-[300px] shadow-lg p-4 cursor-pointer hover:scale-105 transition ease-in">
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="object-cover w-[200px] h-[200px]"
+                  className="object-cover w-[500px] h-[300px]"
                 />
 
                 <h2 className="text-lg font-semibold mt-2">{item.title}</h2>
-                <p className="text-gray-600 w-[200px] text-sm">{item.description}</p>
+                <p className="text-gray-600 w-[200px] line-clamp-2 text-sm">{item.description}</p>
 
                 <div className="flex justify-between items-center mt-3">
                   <span className="font-bold text-green-600">₹{item.price}</span>
                   <button className="bg-blue-600 transition-all text-white px-3 py-1 rounded cursor-pointer">
-                    Add to Cart
+                    See Details
                   </button>
                 </div>
               </div>
