@@ -29,7 +29,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
 
           <div className="border border-gray-300 p-6 text-center">
-            <FaTruck className="inline-block bg-black p-5 text-white rounded-full h-[10vh] w-[6vw] justify-center items-center text-2xl mb-3" />
+            <FaTruck className="inline-block bg-black p-5 text-white rounded-full h-[10vh]  md:h-[12vh] md:w-[8vw] w-[20vw] justify-center items-center text-2xl mb-3" />
             <h4 className="font-semibold text-xl">FREE AND FAST DELIVERY</h4>
             <p className="text-sm text-gray-800">
               Free delivery on all orders over $140
@@ -37,7 +37,7 @@ const Footer = () => {
           </div>
 
           <div className="border border-gray-300 p-6 text-center">
-            <FaHeadphones className="inline-block bg-black p-5 text-white rounded-full h-[11vh] w-[6vw] justify-center items-center text-3xl mb-3" />
+            <FaHeadphones className="inline-block bg-black p-5 text-white rounded-full h-[11vh]  md:h-[12vh] md:w-[8vw] w-[20vw] justify-center items-center text-3xl mb-3" />
             <h4 className="font-semibold text-xl">24/7 CUSTOMER SERVICE</h4>
             <p className="text-sm text-gray-600">
               Friendly 24/7 customer support
@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
 
           <div className="border border-gray-300 p-6 text-center">
-            <RiRefund2Line className="inline-block bg-black p-5 text-white rounded-full h-[12vh] w-[6vw] justify-center items-center text-4xl mb-3" />
+            <RiRefund2Line className="inline-block bg-black p-5 text-white rounded-full h-[12vh]  md:h-[12vh] md:w-[9vw] w-[20vw] justify-center items-center text-4xl mb-3" />
             <h4 className="font-semibold text-xl">MONEY BACK GUARANTEE</h4>
             <p className="text-sm text-gray-600">
               We return money within 30 days
