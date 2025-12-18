@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`${isLoggedIn ? 'block' : 'hidden'} fixed top-0 left-0 w-full z-50 bg-gray-100 shadow-md`}>
+      <nav className={`${isLoggedIn ? 'block' : 'hidden'} fixed top-0 left-0 w-full z-60 bg-gray-100 shadow-md`}>
         <div className="flex justify-between items-center h-17 p-4 md:p-5">
 
           {/* Logo */}
@@ -57,12 +57,12 @@ const Navbar = () => {
             <input
               type="search"
               placeholder="Search your bag"
-              className="w-[280px] pl-9 pr-4 py-2 border border-gray-400 rounded outline-none"
+              className="w-[250px] pl-9 pr-4 py-1.5 border border-gray-400 rounded outline-none"
             />
           </div>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-4 text-md">
+          <div className="hidden md:flex items-center gap-4 text-xl">
             <NavLink
               to="/home"
               className={({ isActive }) =>
@@ -124,8 +124,8 @@ const Navbar = () => {
 
         {/* ================= MOBILE MENU ================= */}
         <div
-          className={`fixed top-0 right-0 h-screen w-[90%] bg-gray-900 text-white flex flex-col items-center justify-center gap-8 text-2xl transform transition-transform duration-300
-         ${menuopen ? "translate-x-0" : "translate-x-full"}`}
+          className={`fixed top-0 left-0 h-screen w-full bg-gray-900 text-white flex flex-col items-center justify-center gap-8 text-2xl transform transition-transform duration-300
+         ${menuopen ? "translate-x-0" : "-translate-x-full"}`}
         >
           {/* Close Icon */}
           <RxCross1

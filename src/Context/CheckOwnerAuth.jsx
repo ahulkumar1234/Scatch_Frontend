@@ -1,7 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import axios from "axios";
-import toast from "react-hot-toast";
-
 
 export const OwnerAuthContext = createContext();
 

@@ -6,6 +6,7 @@ import { MdOutlineReviews } from "react-icons/md";
 import { SiMaterialdesignicons } from "react-icons/si";
 import { MdOutlineBrandingWatermark } from "react-icons/md";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { CiSearch } from "react-icons/ci";
 
 
 const Shop = () => {
@@ -37,7 +38,7 @@ const Shop = () => {
 
   return (
     <>
-      <div className="flex p-5">
+      <div className="flex bg-gray-100">
         {/* LEFT SIDEBAR */}
         {/* <div className="left-menu w-48 flex flex-col gap-4 bg-white shadow-md p-5">
           <NavLink to="/orders" className='hover:underline transition-all ease-in-out flex justify-center items-center gap-2 bg-blue-100 p-2'>Orders  <FaCartShopping /></NavLink>
@@ -46,11 +47,11 @@ const Shop = () => {
           <NavLink to="/shop" className='hover:underline transition-all ease-in-out flex justify-center items-center gap-2 bg-blue-100 p-2'>Brand<MdOutlineBrandingWatermark /></NavLink>
         </div> */}
 
-        {/* PRODUCTS SECTION */}
-        <div className="flex flex-wrap gap-5 justify-center">
+        {/* PRODUCTS SECTION */}        
+        <div className="flex flex-wrap gap-5 justify-center items-center mt-32 mb-16">
           {products.map((item) => (
             <NavLink to={`/details/${item._id}`} key={item._id}>
-              <div className="bg-white w-[300px] shadow-lg p-4 cursor-pointer hover:scale-105 transition ease-in">
+              <div className="bg-white w-[350px]  md:w-[300px] shadow-lg p-4 cursor-pointer hover:scale-105 transition ease-in">
                 <img
                   src={item.image}
                   alt={item.title}
