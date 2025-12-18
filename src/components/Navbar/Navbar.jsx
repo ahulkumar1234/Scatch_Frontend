@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const location = useLocation();
 
-  if (location.pathname === "/owner" || location.pathname === "/ownerpanel") {
+  if (location.pathname === "/owner" || location.pathname === "/ownerpanel" || location.pathname === "/") {
     return null; // navbar hide
   }
 
@@ -43,7 +43,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`${isLoggedIn ? 'block' : 'hidden'} fixed top-0 left-0 w-full z-60 bg-gray-100 shadow-md`}>
+      <nav className={`fixed top-0 left-0 w-full z-60 bg-gray-100 shadow-md`}>
         <div className="flex justify-between items-center h-17 p-4 md:p-5">
 
           {/* Logo */}

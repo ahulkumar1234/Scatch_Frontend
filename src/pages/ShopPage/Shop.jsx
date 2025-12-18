@@ -14,12 +14,14 @@ const Shop = () => {
 
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [menuopen, setmenuOpen] = useState(false)
+  const [filtered, setFiltered] = useState([]);
+  const [search, setSearch] = useState("");
 
   const fetchProducts = async () => {
     setLoading(true)
     const res = await axios.get("https://scatch-backend-41mw.onrender.com/api/v1/products/all");
     setProducts(res.data.allproducts);
+    setFiltered(res.data.allproducts)
     setLoading(false)
   };
 
@@ -47,7 +49,7 @@ const Shop = () => {
           <NavLink to="/shop" className='hover:underline transition-all ease-in-out flex justify-center items-center gap-2 bg-blue-100 p-2'>Brand<MdOutlineBrandingWatermark /></NavLink>
         </div> */}
 
-        {/* PRODUCTS SECTION */}        
+        {/* PRODUCTS SECTION */}
         <div className="flex flex-wrap gap-5 justify-center items-center mt-32 mb-16">
           {products.map((item) => (
             <NavLink to={`/details/${item._id}`} key={item._id}>
