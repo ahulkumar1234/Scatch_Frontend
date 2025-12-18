@@ -8,24 +8,28 @@ import { FaInstagramSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import { IoIosSend } from "react-icons/io";
 import { useLocation } from "react-router-dom";
+import { useAuth } from "../../Context/AuthContext";
 
 const Footer = () => {
 
-    const location = useLocation();
+  const location = useLocation();
+  const { isLoggedIn } = useAuth();
 
-  if (location.pathname === "/owner" || location.pathname === "/ownerpanel" || location.pathname === "/") {
+  if (location.pathname === "/") {
     return null; // footer hide
   }
 
+  if (!isLoggedIn) return null;
+
   return (
-    <footer className="bg-gray-900 text-gray-300 mt-10">
+    <footer className="bg-gray-900 text-gray-300 ">
 
       {/* TOP FEATURES */}
       <div className="bg-white text-black py-10">
         <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 px-6">
 
           <div className="border border-gray-300 p-6 text-center">
-            <FaTruck className="flex justify-center items-center w-full text-2xl mb-3" />
+            <FaTruck className="inline-block bg-black p-5 text-white rounded-full h-[10vh] w-[6vw] justify-center items-center text-2xl mb-3" />
             <h4 className="font-semibold text-xl">FREE AND FAST DELIVERY</h4>
             <p className="text-sm text-gray-800">
               Free delivery on all orders over $140
@@ -33,7 +37,7 @@ const Footer = () => {
           </div>
 
           <div className="border border-gray-300 p-6 text-center">
-            <FaHeadphones className="flex justify-center items-center w-full text-3xl mb-3" />
+            <FaHeadphones className="inline-block bg-black p-5 text-white rounded-full h-[11vh] w-[6vw] justify-center items-center text-3xl mb-3" />
             <h4 className="font-semibold text-xl">24/7 CUSTOMER SERVICE</h4>
             <p className="text-sm text-gray-600">
               Friendly 24/7 customer support
@@ -41,7 +45,7 @@ const Footer = () => {
           </div>
 
           <div className="border border-gray-300 p-6 text-center">
-            <RiRefund2Line className="flex justify-center items-center w-full text-4xl mb-3" />
+            <RiRefund2Line className="inline-block bg-black p-5 text-white rounded-full h-[12vh] w-[6vw] justify-center items-center text-4xl mb-3" />
             <h4 className="font-semibold text-xl">MONEY BACK GUARANTEE</h4>
             <p className="text-sm text-gray-600">
               We return money within 30 days
@@ -108,7 +112,7 @@ const Footer = () => {
         {/* Download App */}
         <div>
           <h3 className="text-white text-lg font-semibold mb-3">Download App</h3>
-          <BsQrCode className="text-9xl text-white"/>
+          <BsQrCode className="text-9xl text-white" />
           <div className="flex gap-4 text-xl cursor-pointer mt-5 text-white">
             <FaFacebook />
             <FaTwitter />

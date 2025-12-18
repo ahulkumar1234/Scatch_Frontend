@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const location = useLocation();
 
-  if (location.pathname === "/owner" || location.pathname === "/ownerpanel" || location.pathname === "/") {
+  if (location.pathname === "/") {
     return null; // navbar hide
   }
 
@@ -22,6 +22,8 @@ const Navbar = () => {
 
   const { setIsLoggedIn, isLoggedIn } = useAuth();
   const navigate = useNavigate()
+
+  if (!isLoggedIn) return null;
 
   const handelLogout = async () => {
     try {
@@ -43,7 +45,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-60 bg-gray-100 shadow-md`}>
+      <nav className={`${isLoggedIn ? "block" : "hidden"} fixed top-0 left-0 w-full z-60 bg-gray-100 shadow-md`}>
         <div className="flex justify-between items-center h-17 p-4 md:p-5">
 
           {/* Logo */}
@@ -62,7 +64,7 @@ const Navbar = () => {
           </div>
 
           {/* Desktop Links */}
-          <div className="hidden md:flex items-center gap-4 text-xl">
+          <div className="hidden md:flex items-center gap-4 text-md">
             <NavLink
               to="/home"
               className={({ isActive }) =>

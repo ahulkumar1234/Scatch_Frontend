@@ -20,43 +20,61 @@ import Home from './pages/HomePage/Home';
 import OwnerProtectedRoute from './components/AuthSystem/OwnerProtectedRoute';
 import Footer from './components/Footer/Footer';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import OwnerLayout from './Layouts/OwnerLayout';
+import UserLayout from './Layouts/UserLayout';
 
 function App() {
-
-  // const location = useLocation();
-  // const hideNavbarRoutes = ["/owner", "/ownerpanel"];   // <-- yaha owner pages list hai
-  // const shouldShowNavbar = !hideNavbarRoutes.includes(location.pathname);
-
   return (
     <Router>
       <OwnerAuthProvider>
         <AuthProvider>
 
-          <Toaster position="top-center" reverseOrder={false} />
-          <Navbar />
+          <Toaster position="top-center" />
+
           <ScrollToTop>
             <Routes>
-              <Route path="/" element={<AuthPage />} />
-              <Route path="/owner" element={<OwnerAuth />} />
-              <Route path="/ownerpanel" element={<OwnerPanel />} />
-              <Route path="/ownerstore" element={<StorePage />} />
 
-              <Route path='/home' element={<Home />} />
-              <Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />
-              <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
-              <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
-              <Route path="/details/:id" element={<ProtectedRoute><DetailProd /></ProtectedRoute>} />
-              <Route path='/checkout/address' element={<ProtectedRoute><Address /></ProtectedRoute>} />
-              <Route path='/checkout/payment' element={<ProtectedRoute><Payment /></ProtectedRoute>} />
-              <Route path='/checkout/summary' element={<ProtectedRoute><Summary /></ProtectedRoute>} />
+              {/* OWNER ROUTES */}
+              <Route element={<OwnerLayout />}>
+                <Route path="/owner" element={<OwnerAuth />} />
+                <Route
+                  path="/ownerpanel"
+                  element={
+                    <OwnerProtectedRoute>
+                      <OwnerPanel />
+                    </OwnerProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/ownerstore"
+                  element={
+                    <OwnerProtectedRoute>
+                      <StorePage />
+                    </OwnerProtectedRoute>
+                  }
+                />
+              </Route>
+
+              {/* USER ROUTES */}
+              <Route element={<UserLayout />}>
+                <Route path="/" element={<AuthPage />} />
+                <Route path="/home" element={<Home />} />
+                <Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />
+                <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
+                <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+                <Route path="/details/:id" element={<ProtectedRoute><DetailProd /></ProtectedRoute>} />
+                <Route path="/checkout/address" element={<ProtectedRoute><Address /></ProtectedRoute>} />
+                <Route path="/checkout/payment" element={<ProtectedRoute><Payment /></ProtectedRoute>} />
+                <Route path="/checkout/summary" element={<ProtectedRoute><Summary /></ProtectedRoute>} />
+              </Route>
+
             </Routes>
           </ScrollToTop>
-          <Footer />
+
         </AuthProvider>
       </OwnerAuthProvider>
     </Router>
-
-  )
+  );
 }
 
 export default App;

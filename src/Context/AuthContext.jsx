@@ -13,7 +13,11 @@ export const AuthProvider = ({ children }) => {
         "https://scatch-backend-41mw.onrender.com/api/v1/users/me",    // <-- FIXED PORT
         { withCredentials: true }
       );
-      setIsLoggedIn(res.data.loggedIn);
+      if(res.data.loggedIn){
+        setIsLoggedIn(true);
+      }else{
+        setIsLoggedIn(false)
+      }
     } catch (error) {
       setIsLoggedIn(false);
     }
