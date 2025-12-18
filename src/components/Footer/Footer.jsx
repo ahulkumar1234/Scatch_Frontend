@@ -7,8 +7,16 @@ import { FaTwitter } from "react-icons/fa";
 import { FaInstagramSquare } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa6";
 import { IoIosSend } from "react-icons/io";
+import { useLocation } from "react-router-dom";
 
 const Footer = () => {
+
+    const location = useLocation();
+
+  if (location.pathname === "/owner" || location.pathname === "/ownerpanel" || location.pathname === "/") {
+    return null; // footer hide
+  }
+
   return (
     <footer className="bg-gray-900 text-gray-300 mt-10">
 
@@ -48,7 +56,7 @@ const Footer = () => {
 
         {/* Exclusive */}
         <div>
-          <h3 className="text-white text-lg font-semibold mb-3">Exclusive</h3>
+          <h3 className="text-white text-lg font-semibold mb-3">Scatch</h3>
           <p className="mb-2">Subscribe</p>
           <p className="text-sm mb-4">Get 10% off your first order</p>
 

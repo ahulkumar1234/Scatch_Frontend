@@ -38,8 +38,8 @@ function App() {
             <Routes>
               <Route path="/" element={<AuthPage />} />
               <Route path="/owner" element={<OwnerAuth />} />
-              <Route path="/ownerpanel" element={<OwnerProtectedRoute><OwnerPanel /></OwnerProtectedRoute>} />
-              <Route path="/ownerstore" element={<OwnerProtectedRoute><StorePage /></OwnerProtectedRoute>} />
+              <Route path="/ownerpanel" element={<OwnerPanel />} />
+              <Route path="/ownerstore" element={<StorePage />} />
 
               <Route path='/home' element={<Home />} />
               <Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />

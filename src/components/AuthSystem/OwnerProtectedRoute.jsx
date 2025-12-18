@@ -9,7 +9,7 @@ const OwnerProtectedRoute = ({ children }) => {
     if (isloggedIn === null) {
         return <div className="flex justify-center items-center h-screen"><ScaleLoader color="blue" /></div>
     }
-    return isloggedIn ? children : <Navigate to="/" />;
+    return isloggedIn ? children : <Navigate to="/owner" />;
 
 };
 

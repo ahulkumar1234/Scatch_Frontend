@@ -11,7 +11,7 @@ export const OwnerAuthProvider = ({ children }) => {
         try {
             const res = await axios.get('https://scatch-backend-41mw.onrender.com/api/v1/owners/ownerauth', { withCredentials: true });
             setIsLoggedIn(res.data.OwnerLoggedin);
-
+console.log(res.data.OwnerLoggedin)
         } catch (error) {
             setIsLoggedIn(false);
         }
