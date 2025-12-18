@@ -124,13 +124,8 @@ const Navbar = () => {
 
         {/* ================= MOBILE MENU ================= */}
         <div
-<<<<<<< HEAD
           className={`fixed top-0 left-0 h-screen w-full bg-gray-900 text-white flex flex-col items-center justify-center gap-8 text-2xl transform transition-transform duration-300
          ${menuopen ? "translate-x-0" : "-translate-x-full"}`}
-=======
-          className={`fixed top-0 right-0 h-screen w-full bg-gray-900 text-white flex flex-col items-center justify-center gap-8 text-2xl transform transition-transform duration-300
-         ${menuopen ? "translate-x-0" : "translate-x-full"}`}
->>>>>>> 820144c1f71fab1be6ba9b95ce82cf2eb3fc2f85
         >
           {/* Close Icon */}
           <RxCross1
