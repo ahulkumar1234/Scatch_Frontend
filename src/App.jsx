@@ -67,7 +67,7 @@ function App() {
               </Route>
               <Route path="/checkout/address" element={<ProtectedRoute><Address /></ProtectedRoute>} />
               <Route path="/checkout/summary" element={<ProtectedRoute><Summary /></ProtectedRoute>} />
-              <Route path="/checkout/orderplace" element={<ProtectedRoute><OrderPlace /></ProtectedRoute>} />
+              <Route path="/checkout/orders/:orderId" element={<ProtectedRoute><OrderPlace /></ProtectedRoute>} />
 
             </Routes>
           </ScrollToTop>

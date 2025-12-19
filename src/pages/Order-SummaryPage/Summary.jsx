@@ -74,7 +74,7 @@ const Summary = () => {
       );
 
       toast.success("Order placed successfully");
-      navigate(`/order/${res.data.orderData._id}`);
+      navigate(`/checkout/orders/${res.data.orderData._id}`);
     } catch (error) {
       toast.error(error.response?.data?.message || "Order failed");
     }

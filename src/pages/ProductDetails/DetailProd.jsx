@@ -42,6 +42,7 @@ const DetailProd = () => {
         <ScaleLoader color="blue" />
       </div>
     );
+    
 
   return (
     <>
