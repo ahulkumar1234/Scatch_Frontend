@@ -12,6 +12,7 @@ const Summary = () => {
 
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [orderLoading, setOrderLoading] = useState(false);
 
   if (!state?.shippingAddress) {
     navigate("/cart");
@@ -60,6 +61,7 @@ const Summary = () => {
 
   const placeOrderHandler = async () => {
     try {
+      setOrderLoading(true);
       const res = await axios.post(
         "https://scatch-backend-41mw.onrender.com/api/v1/orders/create",
         {
@@ -72,9 +74,8 @@ const Summary = () => {
         },
         { withCredentials: true }
       );
-
-      toast.success("Order placed successfully");
       navigate(`/checkout/orders/${res.data.orderData._id}`);
+      setOrderLoading(false);
     } catch (error) {
       toast.error(error.response?.data?.message || "Order failed");
     }
@@ -91,7 +92,7 @@ const Summary = () => {
         </div>
 
         {/* LEFT */}
-        <div className="md:col-span-2 bg-gray-50 p-4 rounded shadow">
+        <div className="md:col-span-2 bg-gray-50 p-4 rounded shadow mt-10">
           <h2 className="text-xl font-bold mb-4">Order Summary</h2>
 
           {cartItems.map(item => (
@@ -137,10 +138,14 @@ const Summary = () => {
 
           <button
             onClick={placeOrderHandler}
-            className="w-full bg-blue-600 text-white mt-4 py-2 rounded cursor-pointer active:scale-95 transition-all duration-300 ease-in-out"
+            disabled={orderLoading}
+            className="w-full bg-blue-600 text-white mt-4 py-2 rounded
+             cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed
+             active:scale-95 transition-all duration-300"
           >
-            Place Order
+            {orderLoading ? "Placing Order..." : "Place Order"}
           </button>
+
         </div>
       </div>
     </>

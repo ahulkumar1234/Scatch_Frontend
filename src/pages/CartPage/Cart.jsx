@@ -77,7 +77,7 @@ const Cart = () => {
 
   return (
     <div className="bg-gray-100 min-h-screen flex justify-center items-center">
-      <div className="w-6xl mx-auto bg-white shadow-md p-6 rounded-md">
+      <div className="w-6xl bg-white shadow-md p-6 rounded-md m-5 mt-28 ">
 
         <h1 className="text-2xl font-bold mb-6">
           Your Cart ({cartItems.items.length})

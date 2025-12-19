@@ -47,7 +47,7 @@ const DetailProd = () => {
   return (
     <>
       <div className="w-full min-h-screen bg-gray-100 md:py-10">
-        <div className="max-w-6xl mx-auto bg-white shadow-md rounded-md p-6 pb-12 mt-18">
+        <div className="max-w-6xl mx-auto bg-white shadow-md rounded-md p-6 pb-12 mt-20">
           {/* Back to Shop */}
           <div className="flex justify-end">
             <button
