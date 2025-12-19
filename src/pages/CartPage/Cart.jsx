@@ -4,13 +4,14 @@ import ScaleLoader from "react-spinners/ScaleLoader";
 import ClockLoader from "react-spinners/ClockLoader"
 import toast from "react-hot-toast";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState(null);
   const [loading, setLoading] = useState(true);
   const [deleteLoading, setDeleteLoading] = useState(null);
 
-  
+  const navigate = useNavigate();
 
   const fetchCartItems = async () => {
     try {
@@ -126,6 +127,7 @@ const Cart = () => {
              text-white font-semibold rounded active:scale-95 
              cursor-pointer transition-all duration-300 ease-in-out`}>
           <button
+          onClick={()=>{navigate('/checkout/address')}}
             className="cursor-pointer w-full h-10"
           >
             Checkout
