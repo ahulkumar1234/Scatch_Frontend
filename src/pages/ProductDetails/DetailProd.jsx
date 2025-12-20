@@ -9,9 +9,11 @@ const DetailProd = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [qty, setQty] = useState(1); // ⬅ quantity state
+  const [loading, setLoading] = useState(false)
 
   const addToCart = async () => {
     try {
+      setLoading(true);
       const res = await axios.post(
         "https://scatch-backend-41mw.onrender.com/api/v1/cart/add",
         { productId: product._id, quantity: qty }, // ⬅ quantity sent to the backend
@@ -19,6 +21,7 @@ const DetailProd = () => {
       );
 
       toast.success(`Added ${qty} item's to cart 🛒`);
+      setLoading(false);
     } catch (error) {
       console.log(error);
       toast.error("Please login first!");
@@ -42,7 +45,7 @@ const DetailProd = () => {
         <ScaleLoader color="blue" />
       </div>
     );
-    
+
 
   return (
     <>
@@ -108,10 +111,10 @@ const DetailProd = () => {
               {/* Buttons */}
               <div className="flex gap-4 mt-6">
                 <button
-                  className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 active:scale-95 transition-all cursor-pointer"
+                  className={`${loading ? "bg-blue-400 text-white cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"} px-6 py-2 rounded-md active:scale-95 transition-all`}
                   onClick={addToCart}
                 >
-                  Add to Cart
+                  {loading?"Adding...":"Add to Cart"}
                 </button>
                 <button className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 active:scale-95 transition-all cursor-pointer">
                   Buy Now

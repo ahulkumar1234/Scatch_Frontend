@@ -7,7 +7,8 @@ import { CiSearch } from "react-icons/ci";
 import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
-
+import { FaUserCircle } from "react-icons/fa";
+import Modal from "../Profile/Modal";
 
 const Navbar = () => {
 
@@ -19,8 +20,10 @@ const Navbar = () => {
 
   const [menuopen, setmenuOpen] = useState(false);
 
+  const [profileopen, setProfileopen] = useState(false);
 
   const { setIsLoggedIn, isLoggedIn } = useAuth();
+
   const navigate = useNavigate()
 
   if (!isLoggedIn) return null;
@@ -43,9 +46,15 @@ const Navbar = () => {
 
   };
 
+  //profile modal open logic
+
+  const handlClick = () => {
+    setProfileopen(!profileopen);
+  }
+
   return (
     <>
-      <nav className={`${isLoggedIn ? "block" : "hidden"} fixed top-0 left-0 w-full z-60 bg-gray-100 shadow-md`}>
+      <nav className={`${isLoggedIn ? "block" : "hidden"} fixed top-0 left-0 w-full z-40 bg-gray-100 shadow-md`}>
         <div className="flex justify-between items-center h-17 p-4 md:p-5">
 
           {/* Logo */}
@@ -108,13 +117,21 @@ const Navbar = () => {
             >
               Cart <FaShoppingCart />
             </NavLink>
-
+            {/* 
             <button
               onClick={handelLogout}
               className="bg-red-500 px-3 py-1 rounded text-white active:scale-95 transition-all ease-in-out duration-200 cursor-pointer"
             >
               Logout
+            </button> */}
+
+            <button
+              onClick={handlClick}
+              className="text-4xl cursor-pointer active:scale-95 transition-all hover:text-gray-600 text-gray-500"
+            >
+              <FaUserCircle />
             </button>
+
           </div>
 
           {/* Hamburger (Mobile only) */}
@@ -192,6 +209,8 @@ const Navbar = () => {
         </div>
       </nav>
 
+      {/* profile modal open logic */}
+      {profileopen && <Modal handlClick={handlClick} />}
 
     </>
   )

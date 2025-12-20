@@ -4,6 +4,9 @@ import toast from "react-hot-toast";
 import { useNavigate, Link } from "react-router-dom";
 import PulseLoader from "react-spinners/PulseLoader";
 import { useAuth } from "../../Context/AuthContext";
+import { FaLock } from "react-icons/fa6";
+import { MdEmail } from "react-icons/md";
+import { FaUser } from "react-icons/fa";
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -76,22 +79,20 @@ const AuthPage = () => {
         <div className="flex justify-center gap-8 mb-6">
           <button
             onClick={() => setIsLogin(true)}
-            className={`pb-1 text-lg font-semibold transition ${
-              isLogin
-                ? "text-blue-700 border-b-2 border-blue-700"
-                : "text-gray-700 hover:text-blue-600"
-            }`}
+            className={`pb-1 text-lg font-semibold transition ${isLogin
+              ? "text-blue-700 border-b-2 border-blue-700"
+              : "text-gray-700 hover:text-blue-600"
+              }`}
           >
             Login
           </button>
 
           <button
             onClick={() => setIsLogin(false)}
-            className={`pb-1 text-lg font-semibold transition ${
-              !isLogin
-                ? "text-blue-700 border-b-2 border-blue-700"
-                : "text-gray-700 hover:text-blue-600"
-            }`}
+            className={`pb-1 text-lg font-semibold transition ${!isLogin
+              ? "text-blue-700 border-b-2 border-blue-700"
+              : "text-gray-700 hover:text-blue-600"
+              }`}
           >
             Signup
           </button>
@@ -104,51 +105,67 @@ const AuthPage = () => {
               <label className="block text-sm mb-1 font-medium text-gray-700">
                 Full Name
               </label>
-              <input
-                type="text"
-                name="fullname"
-                value={formData.fullname}
-                onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none text-gray-700"
-                placeholder="Enter your full name"
-                required={!isLogin}
-              />
+
+              {/* Wrapper must be relative */}
+              <div className="relative">
+                {/* Icon */}
+                <FaUser className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+
+                {/* Input */}
+                <input
+                  type="text"
+                  name="fullname"
+                  value={formData.fullname}
+                  onChange={handleChange}
+                  className="w-full border border-gray-300 rounded-md py-2 pl-10 pr-2 focus:border-blue-600 outline-none text-gray-700"
+                  placeholder="Enter your full name"
+                  required={!isLogin}
+                />
+              </div>
             </div>
+
           )}
 
           <div>
             <label className="block text-sm mb-1 font-medium text-gray-700">
               Email
             </label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none text-gray-700"
-              placeholder="Enter your email"
-              required
-            />
-          </div>
+            <div className="relative">
+              <MdEmail className="absolute left-3 top-1/2 -translate-y-1/2 text-xl text-gray-400 pointer-events-none" />
 
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-md py-2 pl-10 pr-2 focus:border-blue-600 outline-none text-gray-700"
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+          </div>
           <div>
             <label className="block text-sm mb-1 font-medium text-gray-700">
               Password
             </label>
-            <input
-              type="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full border border-gray-300 rounded-md p-2 focus:border-blue-600 outline-none text-gray-700"
-              placeholder="Enter password"
-              required
-            />
-          </div>
+            <div className="relative">
+              <FaLock className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-md" />
 
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className="w-full border border-gray-300 rounded-md py-2 pl-10 pr-2 focus:border-blue-600 outline-none text-gray-700"
+                placeholder="Enter password"
+                required
+              />
+            </div>
+          </div>
           {/* Submit */}
           <button
-            className={`w-full bg-blue-700 text-white p-2 rounded-md font-semibold hover:bg-blue-800 transition cursor-pointer mt-2`}
+            disabled={loading}
+            className={`${loading ? "cursor-not-allowed bg-gray-500" : "cursor-pointer bg-blue-700 text-white hover:bg-blue-800"} w-full p-2 rounded-md font-semibold transition mt-2`}
             type="submit"
           >
             {loading ? (

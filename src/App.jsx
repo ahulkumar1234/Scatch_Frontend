@@ -22,6 +22,8 @@ import OwnerProtectedRoute from './components/AuthSystem/OwnerProtectedRoute';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
 import OwnerLayout from './Layouts/OwnerLayout';
 import UserLayout from './Layouts/UserLayout';
+import Profile from './pages/UserProfile/Profile';
+import Modal from './components/Profile/Modal';
 
 function App() {
   return (
@@ -32,8 +34,8 @@ function App() {
           <Toaster position="top-center" />
 
           <ScrollToTop>
+<Modal/>
             <Routes>
-
               {/* OWNER ROUTES */}
               <Route element={<OwnerLayout />}>
                 <Route path="/owner" element={<OwnerAuth />} />
@@ -60,6 +62,7 @@ function App() {
               <Route element={<UserLayout />}>
                 <Route path="/" element={<AuthPage />} />
                 <Route path="/home" element={<Home />} />
+                <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />
                 <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
                 <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />

@@ -85,14 +85,14 @@ const Summary = () => {
 
   return (
     <>
-      <div className="max-w-5xl mx-auto p-5 grid grid-cols-1 justify-center items-center md:h-screen md:mt-0 md:grid-cols-3 gap-5">
+      <div className="max-w-5xl mx-auto p-5 grid grid-cols-1 justify-center items-center h-screen md:mt-0 md:grid-cols-3 gap-5">
 
         <div className="Back-Button flex justify-center items-center absolute bottom-10 right-50 text-blue-600 hover:underline">
           <button className="cursor-pointer" onClick={() => onClick = navigate(-1)}>Go Back</button>
         </div>
 
         {/* LEFT */}
-        <div className="md:col-span-2 bg-gray-50 p-4 rounded shadow mt-10">
+        <div className="md:col-span-2 bg-gray-50 p-4 rounded shadow">
           <h2 className="text-xl font-bold mb-4">Order Summary</h2>
 
           {cartItems.map(item => (
