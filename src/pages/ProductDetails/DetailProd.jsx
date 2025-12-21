@@ -22,6 +22,7 @@ const DetailProd = () => {
 
       toast.success(`Added ${qty} item's to cart 🛒`);
       setLoading(false);
+      { navigate('/cart') }
     } catch (error) {
       console.log(error);
       toast.error("Please login first!");
@@ -114,9 +115,11 @@ const DetailProd = () => {
                   className={`${loading ? "bg-blue-400 text-white cursor-not-allowed" : "bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"} px-6 py-2 rounded-md active:scale-95 transition-all`}
                   onClick={addToCart}
                 >
-                  {loading?"Adding...":"Add to Cart"}
+                  {loading ? "Adding..." : "Add to Cart"}
                 </button>
-                <button className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 active:scale-95 transition-all cursor-pointer">
+                <button
+                  onClick={() => { navigate('/checkout/address') }}
+                  className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 active:scale-95 transition-all cursor-pointer ">
                   Buy Now
                 </button>
               </div>

@@ -65,7 +65,7 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="userauth min-h-screen flex justify-center items-center bg-cover bg-gray-50 bg-center px-4">
+    <div className="userauth min-h-screen flex justify-center items-center bg-cover bg-gray-50 px-4">
       <div className="bg-white backdrop-blur-sm  border border-gray-200 shadow-lg rounded-2xl p-8 w-full max-w-md">
         {/* Logo */}
         <h1 className="text-4xl font-extrabold text-blue-600 text-center mb-3">

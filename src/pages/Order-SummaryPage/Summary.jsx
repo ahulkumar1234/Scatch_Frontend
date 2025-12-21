@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import ScaleLoader from "react-spinners/ScaleLoader";
-
+import ClipLoader from "react-spinners/ClipLoader";
+import loadRazorpay from "../../utils/loadRazorpay";
 
 const Summary = () => {
 
@@ -43,7 +43,7 @@ const Summary = () => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen w-full text-xl">
-        <ScaleLoader color="blue" />
+        <ClipLoader color="blue" size={60} />
       </div>
     );
   }
@@ -60,32 +60,108 @@ const Summary = () => {
   const totalPrice = itemsPrice + taxPrice + shippingPrice;
 
   const placeOrderHandler = async () => {
+    if (orderLoading) return;
+
+    // 👉 CASE 1: CASH ON DELIVERY
+    if (paymentMethod === "COD") {
+      try {
+        setOrderLoading(true);
+
+        const res = await axios.post(
+          "https://scatch-backend-41mw.onrender.com/api/v1/orders/create",
+          {
+            orderItems: cartItems.map(item => ({
+              productId: item.productId._id,
+              quantity: item.quantity,
+            })),
+            shippingAddress,
+            paymentMethod: "COD",
+          },
+          { withCredentials: true }
+        );
+
+        navigate(`/checkout/orders/${res.data.orderData._id}`);
+      } catch (error) {
+        toast.error(error.response?.data?.message || "Order failed");
+      } finally {
+        setOrderLoading(false);
+      }
+
+      return;
+    }
+
+    // 👉 CASE 2: ONLINE PAYMENT (RAZORPAY)
     try {
       setOrderLoading(true);
-      const res = await axios.post(
-        "https://scatch-backend-41mw.onrender.com/api/v1/orders/create",
-        {
-          orderItems: cartItems.map(item => ({
-            productId: item.productId._id,
-            quantity: item.quantity,
-          })),
-          shippingAddress,
-          paymentMethod,
-        },
+
+      const razorLoaded = await loadRazorpay();
+      if (!razorLoaded) {
+        toast.error("Razorpay SDK failed to load");
+        setOrderLoading(false);
+        return;
+      }
+
+      // 1️⃣ Create Razorpay order (backend)
+      const { data } = await axios.post(
+        "https://scatch-backend-41mw.onrender.com/api/v1/payment/create",
+        { amount: totalPrice },
         { withCredentials: true }
       );
-      navigate(`/checkout/orders/${res.data.orderData._id}`);
-      setOrderLoading(false);
+
+      const options = {
+        key: "rzp_test_xxxxxxxx", // 🔑 Razorpay PUBLIC KEY
+        amount: data.order.amount,
+        currency: "INR",
+        name: "Scatch Store",
+        description: "Order Payment",
+        order_id: data.order.id,
+
+        handler: async function (response) {
+          // 2️⃣ Payment success → create order
+          const res = await axios.post(
+            "https://scatch-backend-41mw.onrender.com/api/v1/orders/create",
+            {
+              orderItems: cartItems.map(item => ({
+                productId: item.productId._id,
+                quantity: item.quantity,
+              })),
+              shippingAddress,
+              paymentMethod: "ONLINE",
+              paymentResult: response,
+            },
+            { withCredentials: true }
+          );
+
+          toast.success("Payment successful");
+          navigate(`/checkout/orders/${res.data.orderData._id}`);
+        },
+
+        prefill: {
+          name: shippingAddress.fullName,
+          contact: shippingAddress.phone,
+        },
+
+        theme: {
+          color: "#2563eb",
+        },
+      };
+
+      const razorpay = new window.Razorpay(options);
+      razorpay.open();
+
     } catch (error) {
-      toast.error(error.response?.data?.message || "Order failed");
+      toast.error("Payment failed");
+    } finally {
+      setOrderLoading(false);
     }
   };
 
 
 
+
   return (
     <>
-      <div className="max-w-5xl mx-auto p-5 grid grid-cols-1 justify-center items-center h-screen md:mt-0 md:grid-cols-3 gap-5">
+      <div className="max-w-5xl mx-auto p-5 grid grid-cols-1 justify-center items-center h-screen md:mt-0 md:grid-cols-3 md:gap-5">
 
         <div className="Back-Button flex justify-center items-center absolute bottom-10 right-50 text-blue-600 hover:underline">
           <button className="cursor-pointer" onClick={() => onClick = navigate(-1)}>Go Back</button>
@@ -139,10 +215,11 @@ const Summary = () => {
           <button
             onClick={placeOrderHandler}
             disabled={orderLoading}
-            className="w-full bg-blue-600 text-white mt-4 py-2 rounded
-             cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed
+            className="w-full flex justify-center items-center bg-blue-600 text-white mt-4 py-2 rounded
+             cursor-pointer  disabled:cursor-not-allowed
              active:scale-95 transition-all duration-300"
           >
+            {orderLoading ? <ClipLoader color="white" size={20} className="mx-2" /> : ""}
             {orderLoading ? "Placing Order..." : "Place Order"}
           </button>
 

@@ -22,7 +22,7 @@ const OrderPlace = () => {
 
       // stop confetti after 4 seconds
       setTimeout(() => {
-        setShowConfetti(false);
+      setShowConfetti(false);
       }, 4000);
     } catch (error) {
       console.error(error);
@@ -36,10 +36,11 @@ const OrderPlace = () => {
   if (!order) {
     return (
       <div className="flex justify-center items-center h-screen w-full">
-        <ClipLoader color="green" size={60} />
+        <ClipLoader color="blue" size={60} />
       </div>
     );
   }
+  
 
   return (
     <div className="w-screen h-screen flex items-center justify-center 
@@ -85,14 +86,16 @@ const OrderPlace = () => {
 
           <p className="animate-[slideUp_0.7s_ease-out]">
             <b>Status:</b>
-            <span className="ml-1 text-sm font-semibold">
+            <span className="ml-1 text-sm ">
               {order.status}
             </span>
           </p>
 
           <p className="animate-[slideUp_0.8s_ease-out]">
             <b>Total Amount:</b> ₹{" "}
+            <span className="">
             {Math.round(order.totalPrice)}
+            </span>
           </p>
         </div>
 
