@@ -161,6 +161,7 @@ const Summary = () => {
 
     } catch (error) {
       toast.error("Payment failed");
+      console.log(import.meta.env.VITE_RAZORPAY_KEY_ID)
       setOrderLoading(false);
     }
 
@@ -173,7 +174,7 @@ const Summary = () => {
     <>
       <div className="max-w-5xl mx-auto p-5 grid grid-cols-1 justify-center items-center h-screen md:mt-0 md:grid-cols-3 md:gap-5">
 
-        <div className="Back-Button flex justify-center items-center absolute bottom-10 right-50 text-blue-600 hover:underline">
+        <div className="Back-Button flex justify-center items-center absolute bottom-5 right-50 text-blue-600 hover:underline">
           <button className="cursor-pointer" onClick={() => onClick = navigate(-1)}>Go Back</button>
         </div>
 
