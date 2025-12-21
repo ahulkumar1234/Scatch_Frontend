@@ -101,7 +101,6 @@ const Summary = () => {
         return;
       }
 
-      // 1️⃣ Create Razorpay order (backend)
       const { data } = await axios.post(
         "https://scatch-backend-41mw.onrender.com/api/v1/payment/create",
         { amount: totalPrice },
@@ -109,7 +108,7 @@ const Summary = () => {
       );
 
       const options = {
-        key: "rzp_test_xxxxxxxx", // 🔑 Razorpay PUBLIC KEY
+        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // ✅ ENV KEY
         amount: data.order.amount,
         currency: "INR",
         name: "Scatch Store",
@@ -117,23 +116,34 @@ const Summary = () => {
         order_id: data.order.id,
 
         handler: async function (response) {
-          // 2️⃣ Payment success → create order
-          const res = await axios.post(
-            "https://scatch-backend-41mw.onrender.com/api/v1/orders/create",
-            {
-              orderItems: cartItems.map(item => ({
-                productId: item.productId._id,
-                quantity: item.quantity,
-              })),
-              shippingAddress,
-              paymentMethod: "ONLINE",
-              paymentResult: response,
-            },
-            { withCredentials: true }
-          );
+          try {
+            const res = await axios.post(
+              "https://scatch-backend-41mw.onrender.com/api/v1/orders/create",
+              {
+                orderItems: cartItems.map(item => ({
+                  productId: item.productId._id,
+                  quantity: item.quantity,
+                })),
+                shippingAddress,
+                paymentMethod: "ONLINE",
+                paymentResult: response,
+              },
+              { withCredentials: true }
+            );
 
-          toast.success("Payment successful");
-          navigate(`/checkout/orders/${res.data.orderData._id}`);
+            toast.success("Payment successful");
+            navigate(`/checkout/orders/${res.data.orderData._id}`);
+          } catch (err) {
+            toast.error("Order creation failed");
+          } finally {
+            setOrderLoading(false); // ✅ YAHAN AANA CHAHIYE
+          }
+        },
+
+        modal: {
+          ondismiss: function () {
+            setOrderLoading(false); // ✅ popup close
+          }
         },
 
         prefill: {
@@ -151,9 +161,9 @@ const Summary = () => {
 
     } catch (error) {
       toast.error("Payment failed");
-    } finally {
       setOrderLoading(false);
     }
+
   };
 
 

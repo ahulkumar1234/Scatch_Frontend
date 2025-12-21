@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const Adress = () => {
+const Address = () => {
 
     const navigate = useNavigate();
 
@@ -126,7 +126,7 @@ const Adress = () => {
                             </label>
 
                             {/* ONLINE */}
-                            <label className="flex items-center gap-2 cursor-pointer text-gray-400 line-through">
+                            <label className="flex items-center gap-2 cursor-pointer">
                                 <input
                                     type="radio"
                                     name="paymentMethod"
@@ -153,4 +153,4 @@ const Adress = () => {
     );
 };
 
-export default Adress;
+export default Address;
