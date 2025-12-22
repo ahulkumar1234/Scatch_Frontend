@@ -5,6 +5,7 @@ import { FaArrowLeftLong } from "react-icons/fa6";
 import { FaCheckCircle } from "react-icons/fa";
 import ClipLoader from "react-spinners/ClipLoader";
 import Confetti from "react-confetti";
+import toast from "react-hot-toast";
 
 const OrderPlace = () => {
   const { orderId } = useParams();
@@ -20,12 +21,12 @@ const OrderPlace = () => {
       );
       setOrder(res.data);
 
-      // stop confetti after 4 seconds
+      // stop confetti after 5 seconds
       setTimeout(() => {
       setShowConfetti(false);
-      }, 4000);
+      }, 5000);
     } catch (error) {
-      console.error(error);
+      toast.error(error);
     }
   };
 

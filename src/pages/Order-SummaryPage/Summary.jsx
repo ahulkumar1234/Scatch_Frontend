@@ -101,14 +101,26 @@ const Summary = () => {
         return;
       }
 
+      const payableAmount = Math.round(Number(totalPrice));
+
+      if (!payableAmount || payableAmount <= 0) {
+        toast.error("Invalid amount");
+        return;
+      }
+
       const { data } = await axios.post(
         "https://scatch-backend-41mw.onrender.com/api/v1/payment/create",
         { amount: totalPrice },
         { withCredentials: true }
       );
 
+      if (!window.Razorpay) {
+        toast.error("Razorpay SDK not loaded");
+        return;
+      }
+
       const options = {
-        key: import.meta.env.VITE_RAZORPAY_KEY_ID, // ✅ ENV KEY
+        key: "rzp_test_Ru9kcpLh9O9Ajk", // ✅ ENV KEY
         amount: data.order.amount,
         currency: "INR",
         name: "Scatch Store",
@@ -142,7 +154,8 @@ const Summary = () => {
 
         modal: {
           ondismiss: function () {
-            setOrderLoading(false); // ✅ popup close
+            toast("Payment cancelled", { icon: "⚠️" });
+            setOrderLoading(false);
           }
         },
 
@@ -156,18 +169,15 @@ const Summary = () => {
         },
       };
 
-      const razorpay = new window.Razorpay(options);
-      razorpay.open();
+      const rzp = new window.Razorpay(options);
+      rzp.open();
 
     } catch (error) {
       toast.error("Payment failed");
-      console.log(import.meta.env.VITE_RAZORPAY_KEY_ID)
       setOrderLoading(false);
     }
 
   };
-
-
 
 
   return (
@@ -175,7 +185,7 @@ const Summary = () => {
       <div className="max-w-5xl mx-auto p-5 grid grid-cols-1 justify-center items-center h-screen md:mt-0 md:grid-cols-3 md:gap-5">
 
         <div className="Back-Button flex justify-center items-center absolute bottom-5 right-50 text-blue-600 hover:underline">
-          <button className="cursor-pointer" onClick={() => onClick = navigate(-1)}>Go Back</button>
+          <button className="cursor-pointer" onClick={() => navigate(-1)}>Go Back</button>
         </div>
 
         {/* LEFT */}
@@ -224,6 +234,7 @@ const Summary = () => {
           </div>
 
           <button
+            type="button"
             onClick={placeOrderHandler}
             disabled={orderLoading}
             className="w-full flex justify-center items-center bg-blue-600 text-white mt-4 py-2 rounded
