@@ -4,6 +4,10 @@ import { useAuth } from "../../Context/AuthContext";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useState } from "react";
+import { FaUser } from "react-icons/fa";
+import { CiLogout } from "react-icons/ci";
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 const Modal = ({ handlClick }) => {
     const location = useLocation();
@@ -52,21 +56,22 @@ const Modal = ({ handlClick }) => {
                     onClick={() => {
                         navigate("/profile");
                     }}
-                    className="w-full cursor-pointer active:scale-95 transition-all duration-200 ease-in-out bg-gray-200 hover:bg-gray-300 rounded px-3 py-1"
+                    className="w-full flex justify-center items-center gap-2 cursor-pointer active:scale-95 transition-all duration-200 ease-in-out bg-gray-200 hover:bg-gray-300 rounded px-3 py-1"
                 >
-                    Profile
+                    <FaUser /> Profile
                 </button>
 
                 <button
                     onClick={handelLogout}
                     disabled={loading}
                     className={`
-                      w-full px-3 py-1 rounded text-white transition-all duration-200 ${loading
-                      ? "bg-red-300 cursor-not-allowed"
-                      : "bg-red-500 hover:bg-red-600 cursor-pointer active:scale-95"}
+                      w-full flex justify-center items-center gap-2 px-3 py-1 rounded text-white transition-all duration-200 ${loading
+                            ? "bg-red-300 cursor-not-allowed"
+                            : "bg-red-500 hover:bg-red-600 cursor-pointer active:scale-95"}
                       `}
                 >
-                    Logout
+                    <CiLogout className={`${loading ? "hidden" : "flex"}`} />
+                    {loading ? <ClipLoader color="white" size={23} /> : "Logout"}
                 </button>
 
             </div>

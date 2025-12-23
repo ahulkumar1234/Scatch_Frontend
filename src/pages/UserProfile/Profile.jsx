@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { MdDelete } from "react-icons/md";
 
 const Profile = () => {
 
@@ -72,8 +73,9 @@ const Profile = () => {
                     <div className="flex gap-3 justify-center mt-5">
                         <button
                             onClick={deleteUser}
-                            className={`${deleteLoading ? "cursor-not-allowed" : "cursor-pointer"} px-3 py-2 border border-red-600 text-red-600 text-sm rounded-lg hover:bg-red-50 transition`}>
-                            {deleteLoading ? "Deleting..." : "Delete account"}
+                            className={`${deleteLoading ? "cursor-not-allowed" : "cursor-pointer"} flex justify-center items-center gap-0.5 px-3 py-2 border border-red-600 text-red-600 text-sm rounded-lg hover:bg-red-50 transition`}>
+                                <MdDelete className='text-lg'/>
+                            {deleteLoading ? "Removing..." : "Remove account"}
                         </button>
                     </div>
                 </div>
