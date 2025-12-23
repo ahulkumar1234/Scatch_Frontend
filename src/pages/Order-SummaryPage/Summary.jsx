@@ -110,7 +110,7 @@ const Summary = () => {
 
       const { data } = await axios.post(
         "https://scatch-backend-41mw.onrender.com/api/v1/payment/create",
-        { amount: totalPrice },
+        { amount: payableAmount },
         { withCredentials: true }
       );
 
