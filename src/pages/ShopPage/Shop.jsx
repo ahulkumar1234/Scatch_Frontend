@@ -1,12 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from 'axios';
 import { NavLink } from "react-router-dom";
-import { FaCartShopping } from "react-icons/fa6";
-import { MdOutlineReviews } from "react-icons/md";
-import { SiMaterialdesignicons } from "react-icons/si";
-import { MdOutlineBrandingWatermark } from "react-icons/md";
 import ScaleLoader from "react-spinners/ScaleLoader";
-import { CiSearch } from "react-icons/ci";
 
 
 const Shop = () => {
@@ -15,7 +10,7 @@ const Shop = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filtered, setFiltered] = useState([]);
-  const [search, setSearch] = useState("");
+
 
   const fetchProducts = async () => {
     setLoading(true)
@@ -50,7 +45,7 @@ const Shop = () => {
         </div> */}
 
         {/* PRODUCTS SECTION */}
-        <div className="flex flex-wrap gap-5 justify-center items-center mt-32 mb-16">
+        <div className="flex flex-wrap gap-5 justify-center items-center mt-30 mb-16">
           {products.map((item) => (
             <NavLink to={`/details/${item._id}`} key={item._id}>
               <div className="bg-white w-[350px]  md:w-[300px] shadow-lg p-4 cursor-pointer hover:scale-105 transition ease-in">
