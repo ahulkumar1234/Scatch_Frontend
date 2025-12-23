@@ -1,16 +1,23 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import ScaleLoader from "react-spinners/ScaleLoader";
 
 const Profile = () => {
 
     const [profile, setProfile] = useState(null);
 
+    const [deleteLoading, setDeleteLoading] = useState(false);
+    const navigate = useNavigate();
+
     const deleteUser = async () => {
+        setDeleteLoading(true)
         try {
-            const res = await axios.post('https://scatch-backend-41mw.onrender.com/api/v1/users/remove', { withCredentials: true });
-            console.log(res);
+            const res = await axios.post('https://scatch-backend-41mw.onrender.com/api/v1/users/remove', {}, { withCredentials: true });
+            toast.success(res.data.message);
+            navigate("/");
+            setDeleteLoading(false);
         } catch (error) {
             toast.error(error.message)
         }
@@ -63,10 +70,11 @@ const Profile = () => {
                     </p>
 
                     <div className="flex gap-3 justify-center mt-5">
-                        <button className="px-3 py-2 border border-red-600 text-red-600 text-sm rounded-lg hover:bg-red-50 transition">
-                            Delete Account
+                        <button
+                            onClick={deleteUser}
+                            className={`${deleteLoading ? "cursor-not-allowed" : "cursor-pointer"} px-3 py-2 border border-red-600 text-red-600 text-sm rounded-lg hover:bg-red-50 transition`}>
+                            {deleteLoading ? "Deleting..." : "Delete account"}
                         </button>
-                        <button onClick={deleteUser}>click</button>
                     </div>
                 </div>
 
