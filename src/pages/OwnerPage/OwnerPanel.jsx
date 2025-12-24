@@ -7,10 +7,13 @@ import { FaStore } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import { useOwnerAuth } from '../../Context/CheckOwnerAuth';
 import { useNavigate } from 'react-router-dom';
+import ClipLoader from "react-spinners/ClipLoader";
 
 const OwnerPanel = () => {
 
   const [loading, setLoading] = useState(false);
+
+  const [signOutloading, setsignOutLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     title: "",
@@ -75,12 +78,12 @@ const OwnerPanel = () => {
 
   const handleSingout = async () => {
     try {
-
+      setsignOutLoading(true);
       const res = await axios.post('https://scatch-backend-41mw.onrender.com/api/v1/owners/signout', {}, { withCredentials: true });
       setIsLoggedIn(false);
       toast.success(res.data.message);
       navigate('/')
-      console.log(res)
+      setsignOutLoading(false)
     } catch (error) {
       toast.error(error.message)
     }
@@ -116,8 +119,11 @@ const OwnerPanel = () => {
         {/* signout */}
         <div className="signout mt-9 flex justify-end">
           <button
+            disabled={signOutloading}
             onClick={handleSingout}
-            className='text-red-700 transition-all duration-200 ease-in-out font-semibold bg-red-100 px-5 py-2 flex justify-center items-center gap-2 w-full cursor-pointer active:scale-95'><CiLogout className='text-xl' /><span>Signout</span>
+            className={`${signOutloading ? "cursor-not-allowed bg-red-50 text-red-700" : "bg-red-100 text-red-700 cursor-pointer active:scale-95"} transition-all duration-200 ease-in-out font-semibold px-5 py-2 flex justify-center items-center gap-2 w-full`}>
+            <CiLogout className={`${signOutloading ? "hidden" : "flex text-xl"}`} />
+            {signOutloading ? <ClipLoader color="red" size={25} /> : "Signout"}
           </button>
         </div>
 

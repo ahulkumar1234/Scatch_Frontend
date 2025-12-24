@@ -42,18 +42,18 @@ function App() {
                 <Route
                   path="/ownerpanel/*"
                   element={
-                    <OwnerProtectedRoute>
+                  
                       <OwnerPanel />
-                    </OwnerProtectedRoute>
+                  
                   }
                 />
 
                 <Route
                   path="/ownerstore"
                   element={
-                    <OwnerProtectedRoute>
+                  
                       <StorePage />
-                    </OwnerProtectedRoute>
+               
                   }
                 />
               </Route>
