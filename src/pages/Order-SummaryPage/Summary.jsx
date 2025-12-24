@@ -101,7 +101,7 @@ const Summary = () => {
         return;
       }
 
-      const payableAmount = Math.round(Number(totalPrice*100));
+      const payableAmount = Math.round(Number(totalPrice));
 
       if (!payableAmount || payableAmount <= 0) {
         toast.error("Invalid amount");
