@@ -15,12 +15,13 @@ const Profile = () => {
     const deleteUser = async () => {
         setDeleteLoading(true)
         try {
-            const res = await axios.post('https://scatch-backend-41mw.onrender.com/api/v1/users/remove', {}, { withCredentials: true });
+            const res = await axios.delete('https://scatch-backend-41mw.onrender.com/api/v1/users/remove', { withCredentials: true });
             toast.success(res.data.message);
             navigate("/");
-            setDeleteLoading(false);
         } catch (error) {
-            toast.error(error.message)
+            toast.error(error.response?.data?.message || "Delete failed");
+        } finally {
+            setDeleteLoading(false);
         }
     }
 
@@ -38,7 +39,6 @@ const Profile = () => {
 
     useEffect(() => {
         fetchProfile();
-        deleteUser();
     }, []);
 
     if (!profile) {
@@ -74,7 +74,7 @@ const Profile = () => {
                         <button
                             onClick={deleteUser}
                             className={`${deleteLoading ? "cursor-not-allowed" : "cursor-pointer"} flex justify-center items-center gap-0.5 px-3 py-2 border border-red-600 text-red-600 text-sm rounded-lg hover:bg-red-50 transition`}>
-                                <MdDelete className='text-lg'/>
+                            <MdDelete className='text-lg' />
                             {deleteLoading ? "Removing..." : "Remove account"}
                         </button>
                     </div>
