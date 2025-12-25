@@ -56,6 +56,7 @@ const AuthPage = () => {
         toast.success(res.data.message);
         setFormData({ fullname: "", email: "", password: "" });
         setIsLogin(true);
+        navigate("/shop");
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");

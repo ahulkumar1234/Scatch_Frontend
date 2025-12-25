@@ -3,73 +3,71 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import ScaleLoader from "react-spinners/ScaleLoader";
+import ClipLoader from "react-spinners/ClipLoader";
 import { MdDelete } from "react-icons/md";
 
 const Profile = () => {
 
+    const navigate = useNavigate();
+
     const [profile, setProfile] = useState(null);
 
     const [deleteLoading, setDeleteLoading] = useState(false);
-    const navigate = useNavigate();
 
-    const [profileform, setProfileForm] = useState({
-        image: null,
-    });
+    const [profileLoading, setProfileLoading] = useState(false);
 
 
-    const handleImage = (e) => {
-        setProfileForm({
-            ...profileform,
-            image: e.target.files[0],
-        });
+    const handleImage = async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
 
-        // auto upload
-        setTimeout(() => {
-            uploadProfileImage();
-        }, 100);
+        const formData = new FormData();
+        formData.append("image", file);
+
+        try {
+            setProfileLoading(true);
+            const res = await axios.post(
+                "https://scatch-backend-41mw.onrender.com/api/v1/users/upload",
+                formData,
+                {
+                    withCredentials: true,
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                }
+            );
+
+            toast.success(res.data.message);
+            setProfileLoading(false);
+            // 🔥 UI instantly update
+            setProfile(res.data.user);
+
+        } catch (error) {
+            toast.error(error.response?.data?.message || "Upload failed");
+        }
     };
-
-   const uploadProfileImage = async () => {
-  if (!profileform.image) {
-    return toast.error("Please select an image");
-  }
-
-  const formData = new FormData();
-  formData.append("image", profileform.image); // 👈 MUST be "image"
-
-  try {
-    const res = await axios.post(
-      "https://scatch-backend-41mw.onrender.com/api/v1/users/upload",
-      formData,
-      {
-        withCredentials: true,
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-
-    toast.success(res.data.message);
-    setProfileForm(res.data.user); // update UI
-
-  } catch (error) {
-    toast.error(error.response?.data?.message || "Upload failed");
-  }
-};
 
 
     const deleteUser = async () => {
-        setDeleteLoading(true)
+
+        setDeleteLoading(true);
         try {
-            const res = await axios.delete('https://scatch-backend-41mw.onrender.com/api/v1/users/remove', { withCredentials: true });
+            const res = await axios.delete(
+                "https://scatch-backend-41mw.onrender.com/api/v1/users/remove",
+                { withCredentials: true }
+            );
+
             toast.success(res.data.message);
+            setProfile(null);
             navigate("/");
+
         } catch (error) {
             toast.error(error.response?.data?.message || "Delete failed");
         } finally {
             setDeleteLoading(false);
         }
-    }
+    };
+
 
     const fetchProfile = async () => {
         try {
@@ -112,22 +110,30 @@ const Profile = () => {
                     {/* Avatar */}
                     <label
                         htmlFor="profileImage"
-                        className="w-28 h-28 rounded-full border-4 border-white bg-white flex items-center justify-center cursor-pointer relative group overflow-hidden"
+                        className="w-28 h-28 rounded-full border-4 border-white bg-white flex items-center justify-center cursor-pointer relative overflow-hidden"
                     >
-                        {/* Default image */}
                         <img
-                            src={''}
-                            alt="Profile"
-                            className="w-full h-full object-cover"
+                            src={profile.picture}
+                            alt=""
+                            className={`w-full h-full object-cover ${profileLoading ? "opacity-50" : ""
+                                }`}
                         />
 
-                        {/* Hover overlay */}
-                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                            <span className="text-white text-xs font-medium">
-                                Upload
-                            </span>
-                        </div>
+                        {profileLoading && (
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/40">
+                                <ClipLoader color="white" size={30} />
+                            </div>
+                        )}
+
+                        {!profileLoading && (
+                            <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 hover:opacity-100 transition">
+                                <span className="text-white text-xs font-medium">
+                                    Upload
+                                </span>
+                            </div>
+                        )}
                     </label>
+
 
                 </div>
 
@@ -149,10 +155,17 @@ const Profile = () => {
                             <MdDelete className='text-lg' />
                             {deleteLoading ? "Removing..." : "Remove account"}
                         </button>
-                        
+
                     </div>
                 </div>
 
+                <div className='absolute p-2 text-blue-600'>
+                    <button 
+                    onClick={()=>navigate(-1)}
+                    className='cursor-pointer'>
+                         ← Back
+                    </button>
+                    </div>
             </div>
         </div>
     );

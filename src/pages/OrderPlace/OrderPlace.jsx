@@ -66,7 +66,7 @@ const OrderPlace = () => {
         {/* Success Icon */}
         <FaCheckCircle
           className="
-            w-full text-white text-7xl sm:text-8xl my-5
+            w-full text-white text-8xl sm:text-8xl my-5
             animate-pulse drop-shadow-[0_0_15px_rgba(255,255,255,0.7)]
           "
         />

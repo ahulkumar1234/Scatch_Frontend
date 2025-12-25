@@ -7,76 +7,63 @@ import { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { CiLogout } from "react-icons/ci";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useProfile } from "../../Context/ProfileContext";
 
 
-const Modal = ({ handlClick }) => {
-    const location = useLocation();
-    if (location.pathname === "/") return null;
+const Modal = () => {
+  const { closeProfile } = useProfile();
+  const navigate = useNavigate();
+  const { setIsLoggedIn } = useAuth();
+  const [loading, setLoading] = useState(false);
 
-    const navigate = useNavigate();
-    const { setIsLoggedIn, isLoggedIn } = useAuth();
+  const handelLogout = async () => {
+    try {
+      setLoading(true);
+      await axios.post(
+        "https://scatch-backend-41mw.onrender.com/api/v1/users/logout",
+        {},
+        { withCredentials: true }
+      );
+      toast.success("Logged out");
+      setIsLoggedIn(false);
+      closeProfile();
+      navigate("/");
+    } catch {
+      toast.error("Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const [loading, setLoading] = useState(false)
+  return (
+    <div className="fixed z-[9999] top-20 right-10 w-[200px] p-5 flex flex-col justify-center items-center h-[130px] bg-white rounded-lg shadow-lg space-y-2">
+      <RxCross1
+        className="absolute top-2 right-2 cursor-pointer text-gray-500"
+        onClick={closeProfile}
+      />
 
-    if (!isLoggedIn) return null;
+      <button
+        onClick={() => {
+          closeProfile();
+          navigate("/profile");
+        }}
+        className="w-full flex justify-center active:scale-95 transition-all ease-in-out duration-200 items-center gap-2 bg-gray-200 hover:bg-gray-300 rounded cursor-pointer px-3 py-1"
+      >
+        <FaUser /> Profile
+      </button>
 
-    const handelLogout = async () => {
-        try {
-            setLoading(true);
-            const res = await axios.post(
-                "https://scatch-backend-41mw.onrender.com/api/v1/users/logout",
-                {},
-                { withCredentials: true }
-            );
-            toast.success(res.data.message);
-            setIsLoggedIn(false);
-            navigate("/");
-            setLoading(false);
-        } catch (error) {
-            toast.error("Something went wrong!");
-        }
-    };
-
-    return (
-        <>
-            {/* Overlay */}
-            {/* <div
-        onClick={handlClick}
-        className="fixed z-40"
-      ></div> */}
-
-            {/* Modal Box */}
-            <div className={`fixed z-50 p-5 top-20 right-10 w-[200px] justify-center hidden md:flex flex-col h-[130px] bg-white rounded-lg shadow-lg space-y-2`}>
-                <RxCross1
-                    className="absolute text-gray-500 top-1 right-1 cursor-pointer"
-                    onClick={handlClick}
-                />
-
-                <button
-                    onClick={() => {
-                        navigate("/profile");
-                    }}
-                    className="w-full flex justify-center items-center gap-2 cursor-pointer active:scale-95 transition-all duration-200 ease-in-out bg-gray-200 hover:bg-gray-300 rounded px-3 py-1"
-                >
-                    <FaUser /> Profile
-                </button>
-
-                <button
-                    onClick={handelLogout}
-                    disabled={loading}
-                    className={`
-                      w-full flex justify-center items-center gap-2 px-3 py-1 rounded text-white transition-all duration-200 ${loading
-                            ? "bg-red-300 cursor-not-allowed"
-                            : "bg-red-500 hover:bg-red-600 cursor-pointer active:scale-95"}
-                      `}
-                >
-                    <CiLogout className={`${loading ? "hidden" : "flex"}`} />
-                    {loading ? <ClipLoader color="white" size={23} /> : "Logout"}
-                </button>
-
-            </div>
-        </>
-    );
+      <button
+        onClick={handelLogout}
+        disabled={loading}
+        className={`w-full flex justify-center items-center gap-2 px-3 py-1 cursor-pointer rounded text-white ${
+          loading ? "bg-red-300" : "bg-red-500 hover:bg-red-600"
+        }`}
+      >
+        <CiLogout className={loading?`hidden`:`flex text-xl`}/>
+        {loading ? <ClipLoader color="white" size={22} /> : "Logout"}
+      </button>
+    </div>
+  );
 };
 
 export default Modal;

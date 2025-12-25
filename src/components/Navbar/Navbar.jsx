@@ -8,9 +8,15 @@ import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import { FaUserCircle } from "react-icons/fa";
-import Modal from "../Profile/Modal";
+import { useProfile } from "../../Context/ProfileContext";
+import { FaUser } from "react-icons/fa";
+import { IoMdHome } from "react-icons/io";
+import { FaStore } from "react-icons/fa";
+import { FcAbout } from "react-icons/fc";
 
 const Navbar = () => {
+  const { openProfile } = useProfile();
+
 
   const location = useLocation();
 
@@ -20,7 +26,6 @@ const Navbar = () => {
 
   const [menuopen, setmenuOpen] = useState(false);
 
-  const [profileopen, setProfileopen] = useState(false);
 
   const { setIsLoggedIn, isLoggedIn } = useAuth();
 
@@ -45,12 +50,6 @@ const Navbar = () => {
     }
 
   };
-
-  //profile modal open logic
-
-  const handlClick = () => {
-    setProfileopen(!profileopen);
-  }
 
   return (
     <>
@@ -126,7 +125,7 @@ const Navbar = () => {
             </button> */}
 
             <button
-              onClick={handlClick}
+              onClick={openProfile}
               className="text-4xl cursor-pointer active:scale-95 transition-all hover:text-gray-600 text-gray-500"
             >
               <FaUserCircle />
@@ -157,11 +156,11 @@ const Navbar = () => {
             onClick={() => setmenuOpen(false)}
             className={({ isActive }) =>
               isActive
-                ? "text-blue-500 font-semibold"
-                : "hover:text-blue-500 transition-all"
+                ? "text-blue-500 font-semibold flex items-center gap-2"
+                : "hover:text-blue-500 transition-all flex items-center gap-2"
             }
           >
-            Home
+            Home <IoMdHome />
           </NavLink>
 
           <NavLink
@@ -169,11 +168,11 @@ const Navbar = () => {
             onClick={() => setmenuOpen(false)}
             className={({ isActive }) =>
               isActive
-                ? "text-blue-500 font-semibold"
-                : "hover:text-blue-500 transition-all"
+                ? "text-blue-500 font-semibold flex items-center gap-2"
+                : "hover:text-blue-500 transition-all flex items-center gap-2"
             }
           >
-            Shop
+            Shop <FaStore />
           </NavLink>
 
           <NavLink
@@ -181,11 +180,11 @@ const Navbar = () => {
             onClick={() => setmenuOpen(false)}
             className={({ isActive }) =>
               isActive
-                ? "text-blue-500 font-semibold"
-                : "hover:text-blue-500 transition-all"
+                ? "text-blue-500 font-semibold flex items-center gap-2"
+                : "hover:text-blue-500 transition-all flex items-center gap-2"
             }
           >
-            About
+            About <FcAbout />
           </NavLink>
 
           <NavLink
@@ -200,6 +199,18 @@ const Navbar = () => {
             Cart <FaShoppingCart />
           </NavLink>
 
+          <NavLink
+            to="/profile"
+            onClick={() => setmenuOpen(false)}
+            className={({ isActive }) =>
+              isActive
+                ? "text-blue-500 font-semibold flex items-center gap-2"
+                : "hover:text-blue-500 transition-all flex items-center gap-2"
+            }
+          >
+            Profile <FaUser className="text-xl"/>
+          </NavLink>
+
           <button
             onClick={handelLogout}
             className="bg-red-500 px-5 py-1.5 rounded text-lg active:scale-95 transition-all ease-in-out duration-200 cursor-pointer"
@@ -208,9 +219,6 @@ const Navbar = () => {
           </button>
         </div>
       </nav>
-
-      {/* profile modal open logic */}
-      {profileopen && <Modal handlClick={handlClick} />}
 
     </>
   )

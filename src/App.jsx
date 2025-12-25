@@ -24,8 +24,13 @@ import OwnerLayout from './Layouts/OwnerLayout';
 import UserLayout from './Layouts/UserLayout';
 import Profile from './pages/UserProfile/Profile';
 import Modal from './components/Profile/Modal';
+import { useProfile } from "./Context/ProfileContext";
+
 
 function App() {
+    const { profileOpen } = useProfile();
+  console.log("PROFILE OPEN STATE:", profileOpen);
+
   return (
     <Router>
       <OwnerAuthProvider>
@@ -34,7 +39,7 @@ function App() {
           <Toaster position="top-center" />
 
           <ScrollToTop>
-<Modal/>
+            {profileOpen && <Modal />}
             <Routes>
               {/* OWNER ROUTES */}
               <Route element={<OwnerLayout />}>
@@ -42,18 +47,18 @@ function App() {
                 <Route
                   path="/ownerpanel/*"
                   element={
-                  
-                      <OwnerPanel />
-                  
+
+                    <OwnerPanel />
+
                   }
                 />
 
                 <Route
                   path="/ownerstore"
                   element={
-                  
-                      <StorePage />
-               
+
+                    <StorePage />
+
                   }
                 />
               </Route>
