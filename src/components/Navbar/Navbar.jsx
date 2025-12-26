@@ -1,4 +1,4 @@
-import { Navigate, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import toast from "react-hot-toast";
 import { useAuth } from "../../Context/AuthContext";
@@ -13,6 +13,8 @@ import { FaUser } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { FaStore } from "react-icons/fa";
 import { FcAbout } from "react-icons/fc";
+import logo from '../../../public/images/logo-1.png'
+import logo2 from '../../../public/images/logo-2.png'
 
 const Navbar = () => {
   const { openProfile } = useProfile();
@@ -53,23 +55,23 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`${isLoggedIn ? "block" : "hidden"} fixed top-0 left-0 w-full z-40 bg-gray-100 shadow-md`}>
-        <div className="flex justify-between items-center h-17 p-4 md:p-5">
+      <nav className={`${isLoggedIn ? "block" : "hidden"} fixed top-0 left-0 w-full z-40 bg-gray-50 shadow-md`}>
+        <div className="flex justify-between items-center h-20 px-4 md:px-5">
 
           {/* Logo */}
           <h1 className="text-2xl text-blue-600 font-bold cursor-pointer">
-            Scatch
+            <img className="w-[150px]" src={logo2} alt="" />
           </h1>
 
           {/* Search (Desktop only) */}
-          <div className="relative hidden md:block">
+          {/* <div className="relative hidden md:block">
             <CiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-xl text-gray-400" />
             <input
               type="search"
               placeholder="Search your bag"
               className="w-[250px] pl-9 pr-4 py-1.5 border border-gray-400 rounded outline-none"
             />
-          </div>
+          </div> */}
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-4 text-md">
@@ -208,7 +210,7 @@ const Navbar = () => {
                 : "hover:text-blue-500 transition-all flex items-center gap-2"
             }
           >
-            Profile <FaUser className="text-xl"/>
+            Profile <FaUser className="text-xl" />
           </NavLink>
 
           <button

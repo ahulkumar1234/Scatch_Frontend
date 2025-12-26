@@ -48,7 +48,7 @@ const Shop = () => {
         <div className="flex flex-wrap gap-5 justify-center items-center mt-30 mb-16">
           {products.map((item) => (
             <NavLink to={`/details/${item._id}`} key={item._id}>
-              <div className="bg-white w-[350px]  md:w-[300px] shadow-lg p-4 cursor-pointer hover:scale-105 transition ease-in">
+              <div className="bg-white w-[350px] rounded-lg  md:w-[300px] shadow-lg p-4 cursor-pointer hover:scale-105 transition-all ease-in-out duration-300">
                 <img
                   src={item.image}
                   alt={item.title}

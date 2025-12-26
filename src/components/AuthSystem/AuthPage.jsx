@@ -7,6 +7,7 @@ import { useAuth } from "../../Context/AuthContext";
 import { FaLock } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import logo2 from '../../../public/images/logo-2.png'
 
 const AuthPage = () => {
   const navigate = useNavigate();
@@ -69,15 +70,12 @@ const AuthPage = () => {
     <div className="userauth min-h-screen flex justify-center items-center bg-cover bg-gray-50 px-4">
       <div className="bg-white backdrop-blur-sm  border border-gray-200 shadow-lg rounded-2xl p-8 w-full max-w-md">
         {/* Logo */}
-        <h1 className="text-4xl font-extrabold text-blue-600 text-center mb-3">
-          Scatch
-        </h1>
-        <p className="text-center text-gray-700 mb-8 text-[17px]">
-          {isLogin ? "Welcome back! Login to continue" : "Create an account to start shopping"}
-        </p>
-
+        <div className="flex justify-center font-extrabold text-blue-600 text-start">
+          <img className="w-[200px]" src={logo2} alt="logo" />
+        </div>
+        
         {/* Tabs */}
-        <div className="flex justify-center gap-8 mb-6">
+        <div className="flex justify-center gap-8 m-6">
           <button
             onClick={() => setIsLogin(true)}
             className={`pb-1 text-lg font-semibold transition ${isLogin

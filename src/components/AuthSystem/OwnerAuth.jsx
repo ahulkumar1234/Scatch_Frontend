@@ -6,6 +6,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { FaLock } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
+import logo2 from '../../../public/images/logo-2.png'
 
 
 
@@ -65,13 +66,12 @@ const AuthPage = () => {
     <div className="ownerauth min-h-screen flex justify-center items-center bg-gray-50 bg-cover bg-center px-4">
       <div className="bg-white backdrop-blur-sm border border-gray-200 shadow-lg rounded-xl p-8 w-full max-w-md">
         {/* Logo */}
-        <h1 className="text-3xl font-extrabold text-blue-600 text-center mb-4">Scatch Admin</h1>
-        <p className="text-center text-gray-700 mb-6">
-          Access your admin dashboard
-        </p>
+        <div className="flex justify-center font-extrabold text-blue-600 text-start">
+          <img className="w-[200px]" src={logo2} alt="logo" />
+        </div>
 
         {/* Tab Buttons */}
-        <div className="flex justify-center gap-6 mb-6">
+        <div className="flex justify-center gap-6 m-6">
           <button
             onClick={() => setIsLogin(true)}
             className={`pb-1 text-lg font-medium transition ${isLogin

@@ -1,0 +1,12 @@
+.flash-sale p{
+    position: relative;
+}
+.flash-sale p::before{
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 5px;
+    background-color: blue;
+    left: -15px;
+    border-radius: 10px;
+}
