@@ -67,10 +67,10 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="userauth min-h-screen flex justify-center items-center bg-cover bg-gray-50 px-4">
+    <div className="userauth min-h-screen flex justify-center items-center bg-cover bg-gradient-to-r from-blue-200 via-blue-100  px-4">
       <div className="bg-white backdrop-blur-sm  border border-gray-200 shadow-lg rounded-2xl p-8 w-full max-w-md">
         {/* Logo */}
-        <div className="flex justify-center font-extrabold text-blue-600 text-start">
+        <div className="flex justify-center">
           <img className="w-[200px]" src={logo2} alt="logo" />
         </div>
         
@@ -79,7 +79,7 @@ const AuthPage = () => {
           <button
             onClick={() => setIsLogin(true)}
             className={`pb-1 text-lg font-semibold transition ${isLogin
-              ? "text-blue-700 border-b-2 border-blue-700"
+              ? "text-blue-500 border-b-2 border-blue-500"
               : "text-gray-700 hover:text-blue-600"
               }`}
           >
@@ -89,7 +89,7 @@ const AuthPage = () => {
           <button
             onClick={() => setIsLogin(false)}
             className={`pb-1 text-lg font-semibold transition ${!isLogin
-              ? "text-blue-700 border-b-2 border-blue-700"
+              ? "text-blue-500 border-b-2 border-blue-500"
               : "text-gray-700 hover:text-blue-600"
               }`}
           >
@@ -155,7 +155,7 @@ const AuthPage = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md py-2 pl-10 pr-2 focus:border-blue-600 outline-none text-gray-700"
+                className="w-full border border-gray-300 rounded-md py-2 pl-10 pr-2 focus:border-blue-500 outline-none text-gray-700"
                 placeholder="Enter password"
                 required
               />
@@ -164,7 +164,7 @@ const AuthPage = () => {
           {/* Submit */}
           <button
             disabled={loading}
-            className={`${loading ? "cursor-not-allowed bg-gray-500" : "cursor-pointer bg-blue-700 text-white hover:bg-blue-800"} w-full p-2 rounded-md font-semibold transition mt-2`}
+            className={`${loading ? "cursor-not-allowed bg-gray-500" : "cursor-pointer bg-blue-500 text-white hover:bg-blue-600"} w-full p-2 rounded-md font-semibold transition mt-2`}
             type="submit"
           >
             {loading ? (
@@ -177,7 +177,7 @@ const AuthPage = () => {
           </button>
 
           <p className="text-center text-sm mt-2">
-            <Link to="/owner" className="text-blue-600 hover:underline font-medium">
+            <Link to="/owner" className="text-blue-500 hover:underline font-medium">
               Admin Login
             </Link>
           </p>

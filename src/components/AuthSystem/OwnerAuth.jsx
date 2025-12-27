@@ -6,7 +6,7 @@ import PulseLoader from "react-spinners/PulseLoader";
 import { FaLock } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
-import logo2 from '../../../public/images/logo-2.png'
+import logo2 from '/images/logo-2.png'
 
 
 
@@ -63,7 +63,7 @@ const AuthPage = () => {
   };
 
   return (
-    <div className="ownerauth min-h-screen flex justify-center items-center bg-gray-50 bg-cover bg-center px-4">
+    <div className="ownerauth min-h-screen flex justify-center items-center bg-gradient-to-r from-blue-200 via-blue-100 px-4">
       <div className="bg-white backdrop-blur-sm border border-gray-200 shadow-lg rounded-xl p-8 w-full max-w-md">
         {/* Logo */}
         <div className="flex justify-center font-extrabold text-blue-600 text-start">
@@ -84,7 +84,7 @@ const AuthPage = () => {
           <button
             onClick={() => setIsLogin(false)}
             className={`pb-1 text-lg font-medium transition ${!isLogin
-              ? "text-blue-700 border-b-2 border-blue-700"
+              ? "text-blue-500 border-b-2 border-blue-500"
               : "text-gray-700 hover:text-blue-600"
               }`}
           >
@@ -143,7 +143,7 @@ const AuthPage = () => {
                 name="password"
                 value={formData.password}
                 onChange={handleChange}
-                className="w-full border border-gray-300 rounded-md py-2 pl-10 pr-2 focus:border-blue-600 outline-none text-gray-700"
+                className="w-full border border-gray-300 rounded-md py-2 pl-10 pr-2 focus:border-blue-500 outline-none text-gray-700"
                 placeholder="Enter password"
                 required
               />
@@ -152,7 +152,7 @@ const AuthPage = () => {
 
           {/* Submit */}
           <button
-            className={`w-full ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-blue-700 hover:bg-blue-800 text-white cursor-pointer"} p-2 rounded-md font-semibold transition mt-2`}
+            className={`w-full ${loading ? "bg-gray-500 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 text-white cursor-pointer"} p-2 rounded-md font-semibold transition mt-2`}
             type="submit"
           >
             {loading ? (
@@ -165,7 +165,7 @@ const AuthPage = () => {
           </button>
 
           <p className="flex justify-center mt-2 text-sm">
-            <Link to="/" className="text-blue-600 hover:underline font-medium">
+            <Link to="/" className="text-blue-500 hover:underline font-medium">
               Back to User Login
             </Link>
           </p>

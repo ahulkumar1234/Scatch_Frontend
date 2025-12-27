@@ -1,7 +1,22 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
+import { IoArrowBackCircleSharp } from "react-icons/io5";
+import { IoArrowForwardCircle } from "react-icons/io5";
+import { useRef } from "react";
 
 const Cards = () => {
+    const Slideref = useRef(null);
+
+
+    const slideright = () => {
+        Slideref.current.scrollBy({ left: 300, behavior: 'smooth' })
+    }
+
+    const slideleft = () => {
+       Slideref.current.scrollBy({ left: -300, behavior: 'smooth' })
+    }
+
+
+
     const bagProducts = [
         {
             id: 1,
@@ -56,13 +71,18 @@ const Cards = () => {
     ];
 
     return (
-        <div className="w-full px-10 py-10 bg-white">
+        <div className="w-full px-10 py-10 bg-white relative">
+
+            <button onClick={slideright}><IoArrowBackCircleSharp className="absolute mx-5 top-50 left-0 text-5xl text-blue-700 z-10 cursor-pointer" /></button>
+            <button onClick={slideleft}><IoArrowForwardCircle className="absolute mx-5 top-50 right-0 text-5xl text-blue-700 z-10 cursor-pointer" /></button>
+
             {/* Cards Wrapper */}
-            <div className="flex flex-wrap justify-center gap-8">
+            <div ref={Slideref} className="card-container flex overflow-x-auto overflow-y-hidden scroll-smooth gap-8 py-6">
                 {bagProducts.map((item) => (
-                    <NavLink to={'/shop'}>
+                    <NavLink
+                        key={item.id}
+                        to={'/shop'}>
                         <div
-                            key={item.id}
                             className="relative bg-white text-black rounded-xl shadow-lg w-[260px] overflow-hidden hover:scale-105 transition duration-300"
                         >
                             {/* SALE Badge */}
@@ -86,7 +106,7 @@ const Cards = () => {
                                 <h2 className="font-semibold text-lg">{item.name}</h2>
 
                                 <div className="flex items-center gap-2">
-                                    <p className="text-blue-600 font-bold text-xl">
+                                    <p className="text-green-600 font-bold text-xl">
                                         ₹{item.price}
                                     </p>
                                     <p className="line-through text-gray-400 text-sm">
@@ -98,7 +118,7 @@ const Cards = () => {
                                     ⭐ {item.rating}
                                 </p>
 
-                                <button className="mt-2 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition">
+                                <button className="mt-2 bg-blue-500 text-white py-2 rounded-md hover:bg-blue-700 transition cursor-pointer">
                                     See details
                                 </button>
                             </div>

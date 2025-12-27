@@ -29,7 +29,6 @@ import { useProfile } from "./Context/ProfileContext";
 
 function App() {
     const { profileOpen } = useProfile();
-  console.log("PROFILE OPEN STATE:", profileOpen);
 
   return (
     <Router>
