@@ -13,8 +13,7 @@ import { FaUser } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { FaStore } from "react-icons/fa";
 import { FcAbout } from "react-icons/fc";
-import logo from '../../../public/images/logo-1.png'
-import logo2 from '../../../public/images/logo-2.png'
+import logo2 from '/images/logo-2.png'
 
 const Navbar = () => {
   const { openProfile } = useProfile();

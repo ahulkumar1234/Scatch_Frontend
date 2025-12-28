@@ -128,7 +128,22 @@ const Summary = () => {
         order_id: data.order.id,
 
         handler: async function (response) {
+          console.log(response)
           try {
+            // 1️⃣ VERIFY PAYMENT FIRST
+            const verifyRes = await axios.post(
+              "https://scatch-backend-41mw.onrender.com/api/v1/payment/verify",
+              response,
+              { withCredentials: true }
+            );
+
+            if (!verifyRes.data.success) {
+              toast.error("Payment verification failed");
+              setOrderLoading(false);
+              return;
+            }
+
+            // 2️⃣ CREATE ORDER ONLY AFTER VERIFICATION
             const res = await axios.post(
               "https://scatch-backend-41mw.onrender.com/api/v1/orders/create",
               {
@@ -145,10 +160,11 @@ const Summary = () => {
 
             toast.success("Payment successful");
             navigate(`/checkout/orders/${res.data.orderData._id}`);
+
           } catch (err) {
-            toast.error("Order creation failed");
+            toast.error("Payment failed");
           } finally {
-            setOrderLoading(false); // ✅ YAHAN AANA CHAHIYE
+            setOrderLoading(false);
           }
         },
 

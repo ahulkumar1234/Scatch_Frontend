@@ -7,7 +7,7 @@ import { useAuth } from "../../Context/AuthContext";
 import { FaLock } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { FaUser } from "react-icons/fa";
-import logo2 from '../../../public/images/logo-2.png'
+import logo2 from '/images/logo-2.png'
 
 const AuthPage = () => {
   const navigate = useNavigate();
