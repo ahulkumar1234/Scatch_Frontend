@@ -47,7 +47,7 @@ const Address = () => {
         <>
             <div className="min-h-screen flex justify-center items-center bg-gray-100 p-5">
                 <div className="Back-Button flex justify-center items-center absolute bottom-10 text-blue-600 hover:underline">
-                    <button className="cursor-pointer" onClick={() => onClick = navigate(-1)}>Go Back</button>
+                    <button className="cursor-pointer" onClick={() => navigate(-1)}>Go Back</button>
                 </div>
                 <form
                     onSubmit={handleSubmit}

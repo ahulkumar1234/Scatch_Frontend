@@ -14,10 +14,13 @@ const Summary = () => {
   const [loading, setLoading] = useState(true);
   const [orderLoading, setOrderLoading] = useState(false);
 
-  if (!state?.shippingAddress) {
-    navigate("/cart");
-    return null;
-  }
+
+  useEffect(() => {
+    if (!state?.shippingAddress) {
+      navigate("/cart");
+    }
+  }, [state, navigate]);
+
 
   const { shippingAddress, paymentMethod } = state;
 
@@ -128,7 +131,7 @@ const Summary = () => {
         order_id: data.order.id,
 
         handler: async function (response) {
-          console.log(response)
+          console.log("RAW RAZORPAY RESPONSE:", response);
           try {
             // 1️⃣ VERIFY PAYMENT FIRST
             const verifyRes = await axios.post(
@@ -184,6 +187,8 @@ const Summary = () => {
           color: "#2563eb",
         },
       };
+      console.log("Razorpay loaded:", window.Razorpay);
+      console.log("loadRazorpay result:", razorLoaded);
 
       const rzp = new window.Razorpay(options);
       rzp.open();
