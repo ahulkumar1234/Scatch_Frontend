@@ -23,7 +23,7 @@ const OrderPlace = () => {
 
       // stop confetti after 5 seconds
       setTimeout(() => {
-      setShowConfetti(false);
+        setShowConfetti(false);
       }, 4000);
     } catch (error) {
       toast.error(error);
@@ -41,7 +41,7 @@ const OrderPlace = () => {
       </div>
     );
   }
-  
+
 
   return (
     <div className="w-screen h-screen flex items-center justify-center 
@@ -87,15 +87,16 @@ const OrderPlace = () => {
 
           <p className="animate-[slideUp_0.7s_ease-out]">
             <b>Status:</b>
-            <span className="ml-1 text-sm ">
-              {order.status}
+            <span className={order.isPaid ? "text-white ml-1 text-sm" : "text-yellow-600 ml-1 text-sm"}>
+              {order.isPaid ? "Paid" : "Cash on Delivery"}
+
             </span>
           </p>
 
           <p className="animate-[slideUp_0.8s_ease-out]">
             <b>Total Amount:</b> ₹{" "}
             <span className="">
-            {Math.round(order.totalPrice)}
+              {Math.round(order.totalPrice)}
             </span>
           </p>
         </div>
