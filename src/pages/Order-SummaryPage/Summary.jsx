@@ -187,8 +187,6 @@ const Summary = () => {
           color: "#2563eb",
         },
       };
-      console.log("Razorpay loaded:", window.Razorpay);
-      console.log("loadRazorpay result:", razorLoaded);
 
       const rzp = new window.Razorpay(options);
       rzp.open();
