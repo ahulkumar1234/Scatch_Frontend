@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -13,7 +13,7 @@ const Summary = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [orderLoading, setOrderLoading] = useState(false);
-  const [paymentSuccess, setPaymentSuccess] = useState(false);
+  const paymentSuccessRef = useRef(false);
 
 
   useEffect(() => {
@@ -132,7 +132,7 @@ const Summary = () => {
         order_id: data.order.id,
 
         handler: async function (response) {
-          setPaymentSuccess(true);
+          paymentSuccessRef.current = true;
           try {
             // 1️⃣ VERIFY PAYMENT FIRST
             const verifyRes = await axios.post(
@@ -179,7 +179,7 @@ const Summary = () => {
 
         modal: {
           ondismiss: function () {
-            if (!paymentSuccess) {
+            if (!paymentSuccessRef.current) {
               toast("Payment cancelled", { icon: "⚠️" });
             }
             setOrderLoading(false);
@@ -200,7 +200,7 @@ const Summary = () => {
       rzp.open();
 
     } catch (error) {
-      if (!paymentSuccess) {
+      if (!paymentSuccessRef.current) {
         toast.error("Payment failed");
       }
       setOrderLoading(false);
