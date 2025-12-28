@@ -42,7 +42,7 @@ const AuthPage = () => {
         setFormData({ email: "", password: "" });
 
         setIsLoggedIn(true);
-        navigate("/shop");
+        navigate("/home");
       } else {
         const res = await axios.post(
           "https://scatch-backend-41mw.onrender.com/api/v1/users/register",
