@@ -13,6 +13,7 @@ const Summary = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [orderLoading, setOrderLoading] = useState(false);
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
 
 
   useEffect(() => {
@@ -131,7 +132,7 @@ const Summary = () => {
         order_id: data.order.id,
 
         handler: async function (response) {
-          console.log("RAW RAZORPAY RESPONSE:", response);
+          setPaymentSuccess(true);
           try {
             // 1️⃣ VERIFY PAYMENT FIRST
             const verifyRes = await axios.post(
@@ -156,7 +157,12 @@ const Summary = () => {
                 })),
                 shippingAddress,
                 paymentMethod: "ONLINE",
-                paymentResult: response,
+                paymentResult: {
+                  razorpay_order_id: response.razorpay_order_id,
+                  razorpay_payment_id: response.razorpay_payment_id,
+                  razorpay_signature: response.razorpay_signature,
+                }
+
               },
               { withCredentials: true }
             );
@@ -165,7 +171,7 @@ const Summary = () => {
             navigate(`/checkout/orders/${res.data.orderData._id}`);
 
           } catch (err) {
-            toast.error("Payment failed");
+            console.error(err);
           } finally {
             setOrderLoading(false);
           }
@@ -173,7 +179,9 @@ const Summary = () => {
 
         modal: {
           ondismiss: function () {
-            toast("Payment cancelled", { icon: "⚠️" });
+            if (!paymentSuccess) {
+              toast("Payment cancelled", { icon: "⚠️" });
+            }
             setOrderLoading(false);
           }
         },
@@ -192,7 +200,9 @@ const Summary = () => {
       rzp.open();
 
     } catch (error) {
-      toast.error("Payment failed");
+      if (!paymentSuccess) {
+        toast.error("Payment failed");
+      }
       setOrderLoading(false);
     }
 

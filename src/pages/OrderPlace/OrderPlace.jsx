@@ -24,7 +24,7 @@ const OrderPlace = () => {
       // stop confetti after 5 seconds
       setTimeout(() => {
       setShowConfetti(false);
-      }, 5000);
+      }, 4000);
     } catch (error) {
       toast.error(error);
     }
