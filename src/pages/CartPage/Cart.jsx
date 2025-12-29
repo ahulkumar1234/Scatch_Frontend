@@ -21,7 +21,7 @@ const Cart = () => {
       );
       setCartItems(res.data.Cartitems);
     } catch (error) {
-      toast.error(error)
+      // toast.error(error.response?.data?.message || error.message || "Delete failed")
       setCartItems([]);
     } finally {
       setLoading(false);

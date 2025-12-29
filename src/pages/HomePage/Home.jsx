@@ -27,7 +27,7 @@ const Home = () => {
     <>
 
       <div className="relative h-screen w-full overflow-y-auto bg-blue-900/30">
-    
+
         {/* Background Image (Fixed) */}
         <div
           className="fixed top-0 left-0 h-screen w-full bg-cover bg-center -z-10"
@@ -35,12 +35,12 @@ const Home = () => {
         ></div>
 
         {/* Content */}
-        <div className="flex min-h-screen items-center justify-center px-6">
+        <div className="flex  min-h-screen items-center justify-center px-6">
           <div className="text-center max-w-2xl">
-            <div className="text-center max-w-2xl">
-              <h1 className='bg-gradient-to-r from-sky-500 via-blue-600 to-indigo-500 text-5xl sm:text-6xl md:text-7xl text-transparent bg-clip-text font-bold sm:font-semibold tracking-tighter mb-5 line-clamp-3 sm:line-clamp-none'>Stylish & Durable Bags for Everyday Life</h1>
+            <div className="">
+              <h1 className='relative text-gray-200 text-6xl mb-10 font-semibold tracking-tighter flex-wrap'><span className='text-5xl sm:text-6xl md:text-8xl mt-10'>Stylish</span>& Durable Bags for <span className='absolute -z-10 text-5xl sm:text-7xl md:text-8xl mx-4 text-blue-800/70 font-bold right-3.5 mt-12 sm:mt-10 md:mt-6 tracking-widest'>Everyday</span> Life</h1>
             </div>
-            <p className="text-white font-light text-sm  sm:text-lg line-clamp-3 md:line-clamp-none">
+            <p className="text-white font-light mt-20 text-sm tracking-tight sm:text-lg line-clamp-3 md:line-clamp-none">
               Scatch brings you stylish and durable bags made for everyday life. Designed with care, built for comfort, and crafted to match your modern lifestyle.
             </p>
             <div className='mt-3'>

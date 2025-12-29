@@ -33,8 +33,13 @@ const Summary = () => {
       );
       setCartItems(res.data.Cartitems.items);
     } catch (error) {
-      toast.error("Failed to load cart");
-      navigate("/cart");
+      if (error.response?.status === 404) {
+        setCartItems([]);
+      } else {
+        toast.error(
+          error.response?.data?.message || "Failed to load cart"
+        );
+      }
     } finally {
       setLoading(false);
     }
