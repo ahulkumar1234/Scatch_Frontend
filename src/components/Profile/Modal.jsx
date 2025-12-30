@@ -27,7 +27,7 @@ const Modal = () => {
       toast.success("Logged out");
       setIsLoggedIn(false);
       closeProfile();
-      navigate("/");
+      navigate("/auth-page");
     } catch {
       toast.error("Something went wrong!");
     } finally {
@@ -36,7 +36,7 @@ const Modal = () => {
   };
 
   return (
-    <div className="fixed z-[9999] top-20 right-10 w-[200px] p-5 flex flex-col justify-center items-center h-[130px] bg-white rounded-lg shadow-lg space-y-2">
+    <div className="fixed z-[999] top-20 right-10 w-[200px] p-5 flex flex-col justify-center items-center h-[130px] bg-white rounded-lg shadow-lg space-y-2">
       <RxCross1
         className="absolute top-2 right-2 cursor-pointer text-gray-500"
         onClick={closeProfile}

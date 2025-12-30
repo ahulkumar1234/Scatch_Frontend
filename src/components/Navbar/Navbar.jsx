@@ -16,21 +16,20 @@ import { FcAbout } from "react-icons/fc";
 import logo2 from '/images/logo-2.png'
 
 const Navbar = () => {
-  const { openProfile } = useProfile();
 
 
   const location = useLocation();
+  const navigate = useNavigate();
 
-  if (location.pathname === "/") {
+  const { openProfile } = useProfile();
+  const [menuopen, setmenuOpen] = useState(false);
+  const { setIsLoggedIn, isLoggedIn } = useAuth();
+
+  
+  if (location.pathname === "/auth-page") {
     return null; // navbar hide
   }
 
-  const [menuopen, setmenuOpen] = useState(false);
-
-
-  const { setIsLoggedIn, isLoggedIn } = useAuth();
-
-  const navigate = useNavigate()
 
   if (!isLoggedIn) return null;
 
@@ -45,7 +44,7 @@ const Navbar = () => {
       toast.success(res.data.message);
       // window.confirm('Are you sure! Do you want to logout');
       setIsLoggedIn(false);
-      navigate('/');
+      navigate('/auth-page');
     } catch (error) {
       toast.error('Something went wrong!')
     }
@@ -75,7 +74,7 @@ const Navbar = () => {
           {/* Desktop Links */}
           <div className="hidden md:flex items-center gap-4 text-md">
             <NavLink
-              to="/home"
+              to="/"
               className={({ isActive }) =>
                 isActive
                   ? "text-blue-600 font-semibold"
@@ -153,7 +152,7 @@ const Navbar = () => {
           />
 
           <NavLink
-            to="/home"
+            to="/"
             onClick={() => setmenuOpen(false)}
             className={({ isActive }) =>
               isActive

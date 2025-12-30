@@ -53,6 +53,7 @@ const AuthPage = () => {
         );
         toast.success(res.data.message);
         setFormData({ fullname: "", email: "", password: "" });
+        navigate("/ownerpanel");
         setIsLogin(true);
       }
     } catch (error) {

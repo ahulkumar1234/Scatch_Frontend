@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }) => {
     return <div className="flex justify-center items-center h-screen w-full text-xl"><ScaleLoader color="blue" /></div>;  // Prevent redirect until checkAuth finishes
   }
 
-  return isLoggedIn ? children : <Navigate to="/" />;
+  return isLoggedIn ? children : <Navigate to="/auth-page" />;
 };
 
 export default ProtectedRoute;

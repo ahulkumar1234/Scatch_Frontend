@@ -42,7 +42,7 @@ const AuthPage = () => {
         setFormData({ email: "", password: "" });
 
         setIsLoggedIn(true);
-        navigate("/home");
+        navigate("/");
       } else {
         const res = await axios.post(
           "https://scatch-backend-41mw.onrender.com/api/v1/users/register",
@@ -57,7 +57,7 @@ const AuthPage = () => {
         toast.success(res.data.message);
         setFormData({ fullname: "", email: "", password: "" });
         setIsLogin(true);
-        navigate("/shop");
+        navigate("/");
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");

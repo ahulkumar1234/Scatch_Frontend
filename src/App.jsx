@@ -60,12 +60,12 @@ function App() {
 
                   }
                 />
-              </Route>
+              </Route>           
 
               {/* USER ROUTES */}
               <Route element={<UserLayout />}>
-                <Route path="/" element={<AuthPage />} />
-                <Route path="/home" element={<Home />} />
+                <Route path="/auth-page" element={<AuthPage />} />
+                <Route path="/" element={<ProtectedRoute><Home /></ProtectedRoute>} />
                 <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
                 <Route path="/shop" element={<ProtectedRoute><Shop /></ProtectedRoute>} />
                 <Route path="/about" element={<ProtectedRoute><About /></ProtectedRoute>} />
