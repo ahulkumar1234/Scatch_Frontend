@@ -59,7 +59,7 @@ const Profile = () => {
 
             toast.success(res.data.message);
             setProfile(null);
-            navigate("/");
+            navigate("/auth-page");
 
         } catch (error) {
             toast.error(error.response?.data?.message || "Delete failed");
