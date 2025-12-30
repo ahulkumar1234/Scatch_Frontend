@@ -56,8 +56,8 @@ const AuthPage = () => {
 
         toast.success(res.data.message);
         setFormData({ fullname: "", email: "", password: "" });
-        setIsLogin(true);
         navigate("/");
+        setIsLogin(true);
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
@@ -73,7 +73,7 @@ const AuthPage = () => {
         <div className="flex justify-center">
           <img className="w-[200px]" src={logo2} alt="logo" />
         </div>
-        
+
         {/* Tabs */}
         <div className="flex justify-center gap-8 m-6">
           <button
