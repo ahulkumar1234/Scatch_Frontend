@@ -15,7 +15,7 @@ const Footer = () => {
   const location = useLocation();
   const { isLoggedIn } = useAuth();
 
-  if (location.pathname === "/") {
+  if (location.pathname === "/auth-page") {
     return null; // footer hide
   }
 
